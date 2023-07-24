@@ -4,108 +4,165 @@ int     main(int ac, char **av)
 {
 	//init screen + player pos
 	// screen(screenWidth, screenHeight, 0, "Raycaster");
-	t_calcul    calc;
+	t_rayC    rayC;
 	while (!done)
 	//raycast starts here
 
 	uint32_t    x;
-
 	x = 0;
 	while (x < MAP_WIDTH)
 	{
-		calc.cameraX = 2 * x / double(MAP_WIDTH) - 1;
-		calc.dirX = calc.dirX + calc.planeX * calc.cameraX;
-		calc.dirY = calc.dirY + calc.planeY * calc.cameraX;
-		calc.mapX = (int)(calc.posX);
-		calc.mapY = (int)(calc.posY);
-		if (calc.rayDirX == 0)
+		rayC.cameraX = 2 * x / double(MAP_WIDTH) - 1;
+		rayC.dirX = rayC.dirX + rayC.planeX * rayC.cameraX;
+		rayC.dirY = rayC.dirY + rayC.planeY * rayC.cameraX;
+		rayC.mapX = (int)(rayC.posX);
+		rayC.mapY = (int)(rayC.posY);
+		if (rayC.rayDirX == 0)
 			deltaDistX = 1e30;
 		else
-			deltaDistX = fabs(1 / calc.rayDirX);
-		if (calc.rayDirY == 0)
+			deltaDistX = fabs(1 / rayC.rayDirX);
+		if (rayC.rayDirY == 0)
 			deltaDistY = 1e30;
 		else
-			deltaDistY = fabs(1 / calc.rayDirY);
+			deltaDistY = fabs(1 / rayC.rayDirY);
 	}
 
 
-	// calculate step
-	if (calc.rayDirX < 0)
+
+	// rayCulate step
+	if (rayC.rayDirX < 0)
 	{
-		calc.stepX = -1;
-		calc.sideDistX = (calc.posX - calc.mapX) * calc.deltaDistX;
+		rayC.stepX = -1;
+		rayC.sideDistX = (rayC.posX - rayC.mapX) * rayC.deltaDistX;
 	}
 	else
 	{
-		calc.stepX = 1;
-		calc.sideDistX = (calc.mapX + 1.0 - calc.posX) * calc.deltaDistX;
+		rayC.stepX = 1;
+		rayC.sideDistX = (rayC.mapX + 1.0 - rayC.posX) * rayC.deltaDistX;
 	}
 	if (rayDirY < 0)
 	{
-		calc.stepY = -1;
-		calc.sideDistY = (calc.posY - calc.mapY) * calc.deltaDistY;
+		rayC.stepY = -1;
+		rayC.sideDistY = (rayC.posY - rayC.mapY) * rayC.deltaDistY;
 	}
 	else
 	{
-		calc.stepY = 1;
-		cacl.sideDistY = (calc.mapY + 1.0 - calc.posY) * calc.deltaDistY;
+		rayC.stepY = 1;
+		cacl.sideDistY = (rayC.mapY + 1.0 - rayC.posY) * rayC.deltaDistY;
 	}
 
+
+
 	// Perform DDA
-	while (calc.hit == 0)
+	while (rayC.hit == 0)
 	{
 		//jump to next map square, either in x-direction, or in y-direction
-		if (calc.sideDistX < calc.sideDistY)
+		if (rayC.sideDistX < rayC.sideDistY)
 		{
-			calc.sideDistX += calc.deltaDistX;
-			calc.mapX += calc.stepX;
-			calc.side = 0;
+			rayC.sideDistX += rayC.deltaDistX;
+			rayC.mapX += rayC.stepX;
+			rayC.side = 0;
 		}
 		else
 		{
-			calc.sideDistY += calc.deltaDistY;
-			calc.mapY += calc.stepY;
-			calc.side = 1;
+			rayC.sideDistY += rayC.deltaDistY;
+			rayC.mapY += rayC.stepY;
+			rayC.side = 1;
 		}
 		//Check if ray has hit a wall
-		if (calc.map[calc.mapX][calc.mapY] > 0)
-			calc.hit = 1;
+		if (rayC.map[rayC.mapX][rayC.mapY] > 0)
+			rayC.hit = 1;
 	}
 
+
+
 	//perform DDA
-    while (calc.hit == 0)
+    while (rayC.hit == 0)
     {
         //jump to next map square, either in x-direction, or in y-direction
-        if (calc.sideDistX < calc.sideDistY)
+        if (rayC.sideDistX < rayC.sideDistY)
         {
-        	calc.sideDistX += calc.deltaDistX;
-        	calc.mapX += calc.stepX;
-          	calc.side = 0;
+        	rayC.sideDistX += rayC.deltaDistX;
+        	rayC.mapX += rayC.stepX;
+          	rayC.side = 0;
         }
         else
         {
-        	calc.sideDistY += calc.deltaDistY;
-          	calc.mapY += calc.stepY;
-          	calc.side = 1;
+        	rayC.sideDistY += rayC.deltaDistY;
+          	rayC.mapY += rayC.stepY;
+          	rayC.side = 1;
         }
         //Check if ray has hit a wall
-        if (calc.worldMap[calc.mapX][calc.mapY] > 0)
-			calc.hit = 1;
+        if (rayC.worldMap[rayC.mapX][rayC.mapY] > 0)
+			rayC.hit = 1;
     }
 
-	// caluclate draw end start
-	if (calc.side == 0)
-		calc.perpWallDist = (calc.sideDistX - calc.deltaDistX);
-	else
-		calc.perpWallDist = (calc.sideDistY - calc.deltaDistY);
+
+
+	if(rayC.side == 0)
+		rayC.perpWallDist = (rayC.sideDistX - rayC.deltaDistX);
+    else
+		rayC.perpWallDist = (rayC.sideDistY - rayC.deltaDistY);
 	//Calculate height of line to draw on screen
-    calc.lineHeight = (int)(MAP_HEIGHT / calc.perpWallDist);
+    rayC.lineHeight = (int)(MAP_HEIGHT / rayC.perpWallDist);
 
     //calculate lowest and highest pixel to fill in current stripe
-    calc.drawStart = -(calc.lineHeight) / 2 + MAP_HEIGHT / 2;
-    if (calc.drawStart < 0)
-		calc.drawStart = 0;
-    calc.drawEnd = calc.lineHeight / 2 + MAP_HEIGHT / 2;
-    if(calc.drawEnd >= MAP_HEIGHT)
-		calc.drawEnd = MAP_HEIGHT - 1;
+    rayC.drawStart = -rayC.lineHeight / 2 + MAP_HEIGHT / 2;
+    if(rayC.drawStart < 0)
+		rayC.drawStart = 0;
+    rayC.drawEnd = rayC.lineHeight / 2 + MAP_HEIGHT / 2;
+    if(rayC.drawEnd >= MAP_HEIGHT)
+		rayC.drawEnd = MAP_HEIGHT - 1;
+
+
+
+	// caluclate draw end start
+	if (rayC.side == 0)
+		rayC.perpWallDist = (rayC.sideDistX - rayC.deltaDistX);
+	else
+		rayC.perpWallDist = (rayC.sideDistY - rayC.deltaDistY);
+	//rayCulate height of line to draw on screen
+    rayC.lineHeight = (int)(MAP_HEIGHT / rayC.perpWallDist);
+
+    //rayCulate lowest and highest pixel to fill in current stripe
+    rayC.drawStart = -(rayC.lineHeight) / 2 + MAP_HEIGHT / 2;
+    if (rayC.drawStart < 0)
+		rayC.drawStart = 0;
+    rayC.drawEnd = rayC.lineHeight / 2 + MAP_HEIGHT / 2;
+    if(rayC.drawEnd >= MAP_HEIGHT)
+		rayC.drawEnd = MAP_HEIGHT - 1;
+
+
+#define KEY_UP 126
+#define KEY_DOWN 125
+#define KEY_LEFT 123
+#define KEY_RIGHT 124
+#define KEY_ROTATE_LEFT 97
+#define KEY_ROTATE_RIGHT 100
+#define ROT_SPEED 0.1
+
+	void	move_forward(t_rayC *rayC, int keycode)
+	{
+		if (keycode != KEY_UP)
+			return ;
+		// 0.1 by default value to maybe change
+		if (rayC.map[int(rayC.posX + rayC.dirX * ROT_SPEED)]
+			[int(rayC.posY)] == 0)
+				rayC.posX += rayC.dirX * ROT_SPEED;
+		if(rayC.map[int(rayC.posX)]
+			[int(rayC.posY + rayC.dirY * ROT_SPEED)] == 0)	
+				rayC.posY += rayC.dirY * ROT_SPEED;
+	}
+
+	void	move_backward(t_rayC *rayC, int keycode)
+	{
+		if (keycode != KEY_DOWN)
+		if(rayC.map[int(rayC.posX - rayC.dirX * ROT_SPEED)]
+			[int(rayC.posY)] == O)
+				rayC.posX -= rayC.dirX * ROT_SPEED;
+		if(rayC.map[int(rayC.posX)]
+			[int(rayC.posY - rayC.dirY * ROT_SPEED)] == 0)
+	  			rayC.posY -= rayC.dirY * ROT_SPEED;
+	}
+
 }

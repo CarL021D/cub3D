@@ -5,12 +5,17 @@
 #include <stdlib.h>
 #include <math.h>
 #include <cstdint.h>
+#include <stdbool.h>
 
 #define MAP_WIDTH 24 
 #define MAP_HEIGHT 24
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT
 
+#define KEY_UP 126
+#define KEY_DOWN 125
+#define KEY_LEFT 123
+#define KEY_RIGHT 124
 
 typedef struct s_map
 {
@@ -22,7 +27,7 @@ typedef struct s_map
 
 }	t_map;
 
-typedef struct s_calcul
+typedef struct s_rayC
 {
 	double		cameraX;
 	int			hit;
@@ -46,7 +51,7 @@ typedef struct s_calcul
 	int			drawStart;
 	int			drawEnd;
 
-}	t_calcul;
+}	t_rayC;
 
 
 
