@@ -1,11 +1,16 @@
-#include "inc/cub3d.h"
+#include "inc/cub3d.h"@
 
 int     main(int ac, char **av)
 {
-	//init screen + player pos
-	// screen(screenWidth, screenHeight, 0, "Raycaster");
-	t_rayC    rayC;
-	while (!done)
+	t_mlx	mlx;	
+	t_data	data;
+	t_rayC	rayC;
+
+//	check_map_error();
+	game_init(&data, &rayC);
+
+	mlx_loop_hook(mlx->mlx_ptr,);
+
 	//raycast starts here
 
 	uint32_t    x;
@@ -18,13 +23,13 @@ int     main(int ac, char **av)
 		rayC.mapX = (int)(rayC.posX);
 		rayC.mapY = (int)(rayC.posY);
 		if (rayC.rayDirX == 0)
-			deltaDistX = 1e30;
+			rayC.deltaDistX = 1e30;
 		else
-			deltaDistX = fabs(1 / rayC.rayDirX);
+			rayC.deltaDistX = fabs(1 / rayC.rayDirX);
 		if (rayC.rayDirY == 0)
-			deltaDistY = 1e30;
+			rayC.deltaDistY = 1e30;
 		else
-			deltaDistY = fabs(1 / rayC.rayDirY);
+			rayC.deltaDistY = fabs(1 / rayC.rayDirY);
 	}
 
 
@@ -40,7 +45,7 @@ int     main(int ac, char **av)
 		rayC.stepX = 1;
 		rayC.sideDistX = (rayC.mapX + 1.0 - rayC.posX) * rayC.deltaDistX;
 	}
-	if (rayDirY < 0)
+	if (rayC.rayDirY < 0)
 	{
 		rayC.stepY = -1;
 		rayC.sideDistY = (rayC.posY - rayC.mapY) * rayC.deltaDistY;
@@ -77,41 +82,41 @@ int     main(int ac, char **av)
 
 
 	//perform DDA
-    while (rayC.hit == 0)
-    {
-        //jump to next map square, either in x-direction, or in y-direction
-        if (rayC.sideDistX < rayC.sideDistY)
-        {
-        	rayC.sideDistX += rayC.deltaDistX;
-        	rayC.mapX += rayC.stepX;
-          	rayC.side = 0;
-        }
-        else
-        {
-        	rayC.sideDistY += rayC.deltaDistY;
-          	rayC.mapY += rayC.stepY;
-          	rayC.side = 1;
-        }
-        //Check if ray has hit a wall
-        if (rayC.worldMap[rayC.mapX][rayC.mapY] > 0)
+	while (rayC.hit == 0)
+	{
+		//jump to next map square, either in x-direction, or in y-direction
+		if (rayC.sideDistX < rayC.sideDistY)
+		{
+			rayC.sideDistX += rayC.deltaDistX;
+			rayC.mapX += rayC.stepX;
+		  	rayC.side = 0;
+		}
+		else
+		{
+			rayC.sideDistY += rayC.deltaDistY;
+		  	rayC.mapY += rayC.stepY;
+		  	rayC.side = 1;
+		}
+		//Check if ray has hit a wall
+		if (rayC.worldMap[rayC.mapX][rayC.mapY] > 0)
 			rayC.hit = 1;
-    }
+	}
 
 
 
 	if(rayC.side == 0)
 		rayC.perpWallDist = (rayC.sideDistX - rayC.deltaDistX);
-    else
+	else
 		rayC.perpWallDist = (rayC.sideDistY - rayC.deltaDistY);
 	//Calculate height of line to draw on screen
-    rayC.lineHeight = (int)(MAP_HEIGHT / rayC.perpWallDist);
+	rayC.lineHeight = (int)(MAP_HEIGHT / rayC.perpWallDist);
 
-    //calculate lowest and highest pixel to fill in current stripe
-    rayC.drawStart = -rayC.lineHeight / 2 + MAP_HEIGHT / 2;
-    if(rayC.drawStart < 0)
+	//calculate lowest and highest pixel to fill in current stripe
+	rayC.drawStart = -rayC.lineHeight / 2 + MAP_HEIGHT / 2;
+	if(rayC.drawStart < 0)
 		rayC.drawStart = 0;
-    rayC.drawEnd = rayC.lineHeight / 2 + MAP_HEIGHT / 2;
-    if(rayC.drawEnd >= MAP_HEIGHT)
+	rayC.drawEnd = rayC.lineHeight / 2 + MAP_HEIGHT / 2;
+	if(rayC.drawEnd >= MAP_HEIGHT)
 		rayC.drawEnd = MAP_HEIGHT - 1;
 
 
@@ -122,14 +127,14 @@ int     main(int ac, char **av)
 	else
 		rayC.perpWallDist = (rayC.sideDistY - rayC.deltaDistY);
 	//rayCulate height of line to draw on screen
-    rayC.lineHeight = (int)(MAP_HEIGHT / rayC.perpWallDist);
+	rayC.lineHeight = (int)(MAP_HEIGHT / rayC.perpWallDist);
 
-    //rayCulate lowest and highest pixel to fill in current stripe
-    rayC.drawStart = -(rayC.lineHeight) / 2 + MAP_HEIGHT / 2;
-    if (rayC.drawStart < 0)
+	//rayCulate lowest and highest pixel to fill in current stripe
+	rayC.drawStart = -(rayC.lineHeight) / 2 + MAP_HEIGHT / 2;
+	if (rayC.drawStart < 0)
 		rayC.drawStart = 0;
-    rayC.drawEnd = rayC.lineHeight / 2 + MAP_HEIGHT / 2;
-    if(rayC.drawEnd >= MAP_HEIGHT)
+	rayC.drawEnd = rayC.lineHeight / 2 + MAP_HEIGHT / 2;
+	if(rayC.drawEnd >= MAP_HEIGHT)
 		rayC.drawEnd = MAP_HEIGHT - 1;
 
 
@@ -164,5 +169,29 @@ int     main(int ac, char **av)
 			[int(rayC.posY - rayC.dirY * ROT_SPEED)] == 0)
 	  			rayC.posY -= rayC.dirY * ROT_SPEED;
 	}
+
+	void	rotate_left(t_rayC *rayC, int keycode)
+	{
+		 //both camera direction and camera plane must be rotated
+		double oldDirX = rayC.dirX;
+		rayC.dirX = rayC.dirX * cos(-rotSpeed) - rayC.dirY * sin(-rotSpeed);
+		rayC.dirY = oldDirX * sin(-rotSpeed) + rayC.dirY * cos(-rotSpeed);
+		rayC.oldPlaneX = planeX;
+		planeX = planeX * cos(-rotSpeed) - planeY * sin(-rotSpeed);
+		planeY = oldPlaneX * sin(-rotSpeed) + planeY * cos(-rotSpeed);
+
+	}
+
+	void	rotate_right(t_rayC *rayC, int keycode)
+	{
+		double oldDirX = rayC.dirX;
+		dirX = rayC.dirX * cos(rotSpeed) - rayC.dirY * sin(rotSpeed);
+		rayC.dirY = oldDirX * sin(rotSpeed) + rayC.dirY * cos(rotSpeed);
+		double oldPlaneX = rayC.planeX;
+		rayC.planeX = rayC.planeX * cos(rotSpeed) - rayC.planeY * sin(rotSpeed);
+		rayC.planeY = oldPlaneX * sin(rotSpeed) + rayC.planeY * cos(rotSpeed);
+
+	}
+
 
 }

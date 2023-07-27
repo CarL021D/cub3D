@@ -17,7 +17,15 @@
 #define KEY_LEFT 123
 #define KEY_RIGHT 124
 
-typedef struct s_map
+typedef struct s_mlx
+{
+	void		*mlx_ptr;
+	void		*win;
+	void		*img[4];
+}	t_mlx;
+
+
+typedef struct s_data
 {
 	int			*map[2];
 	int			map_width;
@@ -25,7 +33,7 @@ typedef struct s_map
 	int			screen_width;
 	int			screen_height;
 
-}	t_map;
+}	t_data;
 
 typedef struct s_rayC
 {
@@ -53,7 +61,7 @@ typedef struct s_rayC
 
 }	t_rayC;
 
-
+	void	game_init();
 
 
 
