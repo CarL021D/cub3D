@@ -62,7 +62,7 @@ typedef struct s_rayC
 }	t_rayC;
 
 	void	game_init();
-
+	int		rayCast(t_rayC * rayC);
 
 
 

@@ -9,19 +9,10 @@ int     main(int ac, char **av)
 //	check_map_error();
 	game_init(&data, &rayC);
 
-	mlx_loop_hook(mlx->mlx_ptr,);
+	mlx_loop_hook(mlx.mlx_ptr, );
 
 	//raycast starts here
 
-	uint32_t    x;
-	x = 0;
-	while (x < MAP_WIDTH)
-	{
-		member_init(rayC);
-		calculate_step_and_side_dist(rayC);
-		perform_dda(rayC);
-		x++;
-	}
 
 	void	member_init(t_rayC *rayC)
 	{
