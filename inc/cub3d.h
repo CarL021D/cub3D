@@ -10,7 +10,7 @@
 #define MAP_WIDTH 24 
 #define MAP_HEIGHT 24
 #define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT
+#define SCREEN_HEIGHT 640
 
 #define KEY_UP 126
 #define KEY_DOWN 125
@@ -62,7 +62,18 @@ typedef struct s_rayC
 }	t_rayC;
 
 	void	game_init();
+
 	int		rayCast(t_rayC * rayC);
+	void	caluclate_ray_dist(t_rayC *rayC);
+	void	ray_dist_init(t_rayC *rayC);
+	void	perform_dda(t_rayC *rayC);
+	void	calculate_step_and_side_dist(t_rayC *rayC);
+	void	member_init(t_rayC *rayC);
+
+
+
+
+
 
 
 
