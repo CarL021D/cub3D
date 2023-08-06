@@ -12,10 +12,12 @@
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 640
 
-#define KEY_UP 126
-#define KEY_DOWN 125
-#define KEY_LEFT 123
+#define KEY_UP 87
+#define KEY_DOWN 83
+#define KEY_LEFT 69
 #define KEY_RIGHT 124
+#define KEY_ROT_LEFT 65
+#define KEY_ROT_RIGHT 68
 
 typedef struct s_mlx
 {
@@ -66,7 +68,7 @@ typedef struct s_rayC
 	int		rayCast(t_rayC * rayC);
 	void	caluclate_ray_dist(t_rayC *rayC);
 	void	ray_dist_init(t_rayC *rayC);
-	void	perform_dda(t_rayC *rayC);
+	void	dda(t_rayC *rayC);
 	void	calculate_step_and_side_dist(t_rayC *rayC);
 	void	member_init(t_rayC *rayC);
 

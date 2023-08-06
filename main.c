@@ -41,6 +41,7 @@ int     main(int ac, char **av)
 	void	move_backward(t_rayC *rayC, int keycode)
 	{
 		if (keycode != KEY_DOWN)
+			return ;
 		if(rayC.map[int(rayC.posX - rayC.dirX * ROT_SPEED)]
 			[int(rayC.posY)] == O)
 				rayC.posX -= rayC.dirX * ROT_SPEED;
@@ -49,8 +50,35 @@ int     main(int ac, char **av)
 	  			rayC.posY -= rayC.dirY * ROT_SPEED;
 	}
 
+	void	move_left(t_rayC *rayC, int keycode)
+	{
+		if (keycode != KEY_LEFT)
+			return ;
+		// 0.1 by default value to maybe change
+		if (rayC.map[int(rayC.posX + rayC.planeX * ROT_SPEED)]
+			[int(rayC.posY)] == 0)
+				rayC.posX += rayC.planeX * ROT_SPEED;
+		if(rayC.map[int(rayC.posX)]
+			[int(rayC.posY + rayC.planeY * ROT_SPEED)] == 0)	
+				rayC.posY += rayC.planeY * ROT_SPEED;
+	}
+
+	void	move_right(t_rayC *rayC, int keycode)
+	{
+		if (keycode != KEY_RIGHT)
+			return ;
+		if(rayC.map[int(rayC.posX - rayC.planeX * ROT_SPEED)]
+			[int(rayC.posY)] == O)
+				rayC.posX -= rayC.planeX * ROT_SPEED;
+		if(rayC.map[int(rayC.posX)]
+			[int(rayC.posY - rayC.planeY * ROT_SPEED)] == 0)
+	  			rayC.posY -= rayC.planeY * ROT_SPEED;
+	}
+
 	void	rotate_left(t_rayC *rayC, int keycode)
 	{
+		if (keycode != KEY_ROT_LEFT)
+			return ;
 		 //both camera direction and camera plane must be rotated
 		double oldDirX = rayC.dirX;
 		rayC.dirX = rayC.dirX * cos(-rotSpeed) - rayC.dirY * sin(-rotSpeed);
@@ -63,13 +91,14 @@ int     main(int ac, char **av)
 
 	void	rotate_right(t_rayC *rayC, int keycode)
 	{
+		if (keycode != KEY_RIGHT)
+			return ;
 		double oldDirX = rayC.dirX;
 		dirX = rayC.dirX * cos(rotSpeed) - rayC.dirY * sin(rotSpeed);
 		rayC.dirY = oldDirX * sin(rotSpeed) + rayC.dirY * cos(rotSpeed);
 		double oldPlaneX = rayC.planeX;
 		rayC.planeX = rayC.planeX * cos(rotSpeed) - rayC.planeY * sin(rotSpeed);
 		rayC.planeY = oldPlaneX * sin(rotSpeed) + rayC.planeY * cos(rotSpeed);
-
 	}
 
 

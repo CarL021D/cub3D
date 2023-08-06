@@ -8,7 +8,7 @@ int	rayCast(t_rayC *rayC)
 	{
 		member_init(rayC);
 		calculate_step_and_side_dist(rayC);
-		perform_dda(rayC);
+		dda(rayC);
 		ray_dist_init(t_rayC *rayC);
 		caluclate_ray_dist(t_rayC *rayC);
 		x++;

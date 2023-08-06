@@ -42,7 +42,7 @@ void	calculate_step_and_side_dist(t_rayC *rayC)
 	}
 }
 
-void	perform_dda(t_rayC *rayC)
+void	dda(t_rayC *rayC)
 {
 	while (rayC.hit == 0)
 	{
