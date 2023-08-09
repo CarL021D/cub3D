@@ -1,6 +1,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+#include <mlx.h>
 #include <unsitd.h>
 #include <stdlib.h>
 #include <math.h>
@@ -12,12 +13,13 @@
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 640
 
-#define KEY_UP 87
-#define KEY_DOWN 83
-#define KEY_LEFT 69
+#define KEY_UP 126
+#define KEY_DOWN 125
+#define KEY_LEFT 123
 #define KEY_RIGHT 124
-#define KEY_ROT_LEFT 65
-#define KEY_ROT_RIGHT 68
+#define KEY_ROTATE_LEFT 97
+#define KEY_ROTATE_RIGHT 100
+#define ROT_SPEED 0.1
 
 typedef struct s_mlx
 {
@@ -25,6 +27,17 @@ typedef struct s_mlx
 	void		*win;
 	void		*img[4];
 }	t_mlx;
+
+typedef struct s_tex
+{
+	void *img_ptr;       // Pointer to the loaded image
+	char *data;          // Pointer to the pixel data
+	int width;           // Width of the texture
+	int height;          // Height of the texture
+	int bits_per_pixel;  // Bits per pixel for the texture
+	int size_line;       // Bytes per line in the texture
+	int endian;          // Endianness information
+}	t_tex;
 
 
 typedef struct s_data
@@ -44,6 +57,7 @@ typedef struct s_rayC
 	int			side;
 	int			lineHeight;
 	double		perpWallDist;
+	double		wallX;
 	double		posX;
 	double		posY;
 	double		dirX;
@@ -71,6 +85,14 @@ typedef struct s_rayC
 	void	dda(t_rayC *rayC);
 	void	calculate_step_and_side_dist(t_rayC *rayC);
 	void	member_init(t_rayC *rayC);
+
+	bool	move_forward(t_rayC *rayC, int keycode);
+	bool	move_backward(t_rayC *rayC, int keycode);
+	bool	move_left(t_rayC *rayC, int keycode);
+	bool	move_right(t_rayC *rayC, int keycode);
+	bool	rotate_left(t_rayC *rayC, int keycode);
+	bool	rotate_right(t_rayC *rayC, int keycode);
+	int     keys_handler(int key, t_mlx *mlx);
 
 
 
