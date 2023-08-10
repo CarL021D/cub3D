@@ -1,6 +1,6 @@
 #include "inc/cub3d.h"
 
-int	rayCast(t_rayC *rayC)
+int	run_rayCast_game(t_rayC *rayC)
 {
 	uint32_t    x;
 	int32_t		texX;
@@ -16,6 +16,7 @@ int	rayCast(t_rayC *rayC)
 		get_wallX(rayC);
 		texX = get_textX(rayC);
 		draw_rays(rayC, texX);
+		
 		x++;
 	}
 	return (1);

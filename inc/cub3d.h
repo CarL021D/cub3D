@@ -1,11 +1,13 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#include <mlx.h>
-#include <unsitd.h>
+#include "../mlx/mlx.h"
+# include <X11/X.h>
+# include <X11/keysym.h>
+#include <unistd.h>
 #include <stdlib.h>
 #include <math.h>
-#include <cstdint.h>
+// #include <cstdint.h>
 #include <stdbool.h>
 
 #define MAP_WIDTH 24 
@@ -20,6 +22,19 @@
 #define KEY_ROTATE_LEFT 97
 #define KEY_ROTATE_RIGHT 100
 #define ROT_SPEED 0.1
+
+typedef struct s_data
+{
+	t_mlx		*mlx;
+	t_tex		*tex;
+	t_rayC		*rayC
+	int			*map[2];
+	int			map_width;
+	int			map_height;
+	int			screen_width;
+	int			screen_height;
+
+}	t_data;
 
 typedef struct s_mlx
 {
@@ -40,15 +55,6 @@ typedef struct s_tex
 }	t_tex;
 
 
-typedef struct s_data
-{
-	int			*map[2];
-	int			map_width;
-	int			map_height;
-	int			screen_width;
-	int			screen_height;
-
-}	t_data;
 
 typedef struct s_rayC
 {
@@ -78,8 +84,7 @@ typedef struct s_rayC
 }	t_rayC;
 
 	void	game_init();
-
-	int		rayCast(t_rayC * rayC);
+	int		run_rayCast_game(t_rayC * rayC);
 	void	caluclate_ray_dist(t_rayC *rayC);
 	void	ray_dist_init(t_rayC *rayC);
 	void	dda(t_rayC *rayC);
