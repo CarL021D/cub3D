@@ -4,16 +4,14 @@ int     main(int ac, char **av)
 {
 	(void)ac;
 	(void)av;
-	t_mlx	mlx;	
 	t_data	data;
-	t_rayC	rayC;
 
 //	check_map_error();
-	game_init(&data, &rayC);
+	game_init(&data, &data);
 
-	mlx_hook(mlx.mlx_ptr, KeyPress, KeyPressMask, keys_handler, );
-	mlx_hook(mlx.mlx_ptr, KeyPress, KeyReleaseMask, keys_handler, /*global struct to set */);
-	mlx_loop_hook(mlx.mlx_ptr, run_rayCast_game, keys_handler, rayC);
+	mlx_hook(mlx.mlx_ptr, KeyPress, KeyPressMask, keys_handler, &data);
+	mlx_hook(mlx.mlx_ptr, KeyPress, KeyReleaseMask, keys_handler, data.(&mlx);
+	mlx_loop_hook(mlx.mlx_ptr, run_rayCast_game, keys_handler, &data);
 
 	//raycast starts here
 

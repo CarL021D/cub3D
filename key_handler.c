@@ -13,13 +13,13 @@ static void	free_all_and_quit(t_mlx *mlx)
 	exit(EXIT_SUCCESS);
 }
 
-int     keys_handler(int key, t_mlx *mlx)
+int     keys_handler(int key, t_mlx *data)
 {
 	if (key == XK_Escape)
-		free_all_and_quit(mlx);
-	if (move_forward(rayC, keycode) || move_backward(rayC, keycode)
-		|| move_left(rayC, keycode) || move_right(rayC, keycode)
-		|| rotate_left(rayC, keycode) || rotate_right(rayC, keycode))
+		free_all_and_quit(data->mlx);
+	if (move_forward(data, keycode) || move_backward(data, keycode)
+		|| move_left(data, keycode) || move_right(data, keycode)
+		|| rotate_left(data, keycode) || rotate_right(data, keycode))
 			return (1)
 	return (0);
 }

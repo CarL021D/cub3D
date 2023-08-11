@@ -1,14 +1,14 @@
 
 NAME = so_long
 
-SRCS	= 		main.c                             \
-                init.c                         \
-               key_handler.c                 \
-               playerDirection.c                             \
-                playerRotation.c             \
-                rayCast.c           \
-                rayCastUtil1.c                          \
-                rayCastUtil2.c                          \
+SRCS	= 		main.C				\
+				init.C				\
+				key_handler.C		\
+				playerDirection.c	\
+				playerRotation.C	\
+				rayCast.C			\
+				rayCastUtils1.C		\
+				rayCastUtils2.C		\
 				
 
 OBJS	= ${SRCS:.c=.o}

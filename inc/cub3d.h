@@ -13,7 +13,7 @@
 #define MAP_WIDTH 24 
 #define MAP_HEIGHT 24
 #define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 640
+#define SCREEN_HEIGHT 480
 
 #define KEY_UP 126
 #define KEY_DOWN 125
@@ -27,13 +27,15 @@ typedef struct s_data
 {
 	t_mlx		*mlx;
 	t_tex		*tex;
-	t_rayC		*rayC
 	int			*map[2];
 	int			map_width;
 	int			map_height;
-	int			screen_width;
-	int			screen_height;
-
+	double		posX;
+	double		posY;
+	double		dirX;
+	double		dirY;
+	double		planeX;
+	double		planeY;
 }	t_data;
 
 typedef struct s_mlx
@@ -64,12 +66,6 @@ typedef struct s_rayC
 	int			lineHeight;
 	double		perpWallDist;
 	double		wallX;
-	double		posX;
-	double		posY;
-	double		dirX;
-	double		dirY;
-	double		planeX;
-	double		planeY;
 	int			mapX;
 	int			mapY;
 	double		sideDistX;
