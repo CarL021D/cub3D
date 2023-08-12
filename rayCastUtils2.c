@@ -1,41 +1,40 @@
 
 
-void	get_wallX(t_rayC *rayC)
+void	get_wallX(t_data *data, t_rayC *rayC)
 {
-	if (rayC.side == 0)
-		rayC.wallX = rayC.posY + rayC.perpWallDist * rayC.dirY;
+	if (rayC->side == 0)
+		rayC->wallX = data->posY + rayC->perpWallDist * data->dirY;
 	else
-		rayC.wallX = rayC.posX + rayC.perpWallDist * rayC.dirX;
-	rayC.wallX -= floor(rayC.wallX); 
+		rayC->wallX = data->posX + rayC->perpWallDist * data->dirX;
+	rayC->wallX -= floor(rayC->wallX); 
 }
 
-double	get_textX(t_rayC *rayC, t_tex *tex)
+void	get_textX(t_data *data,t_rayC *rayC)
 {
-	rayC.texX = int(rayC.wallX * double(tex.width))
-	if (rayC.side == && rayC.dirX > 0)
-		texX = tex.width - texX - 1;
-	if (rayC.side == 1 && rayC.dirY < 0)
-		texX = tex.width - texX - 1;
-	return (texX);
+	rayC->texX = int(rayC->wallX * double(tex->width))
+	if (rayC->side == && data->dirX > 0)
+		rayC->texX = tex->width - rayC->texX - 1;
+	if (rayC->side == 1 && rayC->data < 0)
+		rayC->texX = tex->width - rayC->texX - 1;
 }
 
-void	draw_ray(t_rayC *rayC, t_tex *tex, int32_t texX)
+void	draw_rays(t_rayC *rayC, t_tex *tex)
 {
 	int		y;
 	int		texY;
 	double	step;
 	double	texPos;
 
-	y = rayC.drawStart;
-	step = 1.0 * tex.height / rayC.lineHeight;
-	texPos = (rayC.drawStart - MAP_HEIGHT / 2 + rayC.lineHeight / 2) * step;
-	while (y < rayC.drawEnd)
+	y = rayC->drawStart;
+	step = 1.0 * tex->height / rayC->lineHeight;
+	texPos = (rayC->drawStart - MAP_HEIGHT / 2 + rayC->lineHeight / 2) * step;
+	while (y < rayC->drawEnd)
 	{
-		texY = (int)texPos & (tex.height - 1);
+		texY = (int)texPos & (tex->height - 1);
 		texPos += step;
 
 		// TO DO
-		Uint32 color = texture[texNum][texHeight * texY + texX];
-		
+		// Uint32 color = texture[texNum][texHeight * texY + rayC->texX];
+		y++;
 	}
 }
