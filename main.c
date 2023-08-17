@@ -8,9 +8,8 @@ int     main(int ac, char **av)
 
 //	check_map_error();
 	game_init(&data, &data);
-
 	mlx_hook(mlx.mlx_ptr, KeyPress, KeyPressMask, keys_handler, &data);
-	mlx_hook(mlx.mlx_ptr, KeyPress, KeyReleaseMask, keys_handler, data.(&mlx);
+	mlx_hook(mlx.mlx_ptr, KeyPress, KeyReleaseMask, keys_handler, data.(&mlx));
 	mlx_loop_hook(mlx.mlx_ptr, run_rayCast_game, keys_handler, &data);
 
 	//raycast starts here
