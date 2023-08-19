@@ -23,6 +23,24 @@
 #define KEY_ROTATE_RIGHT 100
 #define ROT_SPEED 0.1
 
+typedef struct s_tex
+{
+	void *img_ptr;       // Pointer to the loaded image
+	char *data;          // Pointer to the pixel data
+	int width;           // Width of the texture
+	int height;          // Height of the texture
+	int bits_per_pixel;  // Bits per pixel for the texture
+	int size_line;       // Bytes per line in the texture
+	int endian;          // Endianness information
+}	t_tex;
+
+typedef struct s_mlx
+{
+	void		*mlx_ptr;
+	void		*win;
+	void		*img[4];
+}	t_mlx;
+
 typedef struct s_data
 {
 	t_mlx		*mlx;
@@ -37,26 +55,6 @@ typedef struct s_data
 	double		planeX;
 	double		planeY;
 }	t_data;
-
-typedef struct s_mlx
-{
-	void		*mlx_ptr;
-	void		*win;
-	void		*img[4];
-}	t_mlx;
-
-typedef struct s_tex
-{
-	void *img_ptr;       // Pointer to the loaded image
-	char *data;          // Pointer to the pixel data
-	int width;           // Width of the texture
-	int height;          // Height of the texture
-	int bits_per_pixel;  // Bits per pixel for the texture
-	int size_line;       // Bytes per line in the texture
-	int endian;          // Endianness information
-}	t_tex;
-
-
 
 typedef struct s_rayC
 {
@@ -79,7 +77,7 @@ typedef struct s_rayC
 
 }	t_rayC;
 
-	void	game_init();
+	void	game_init(t_data *data);
 	int		run_rayCast_game(t_rayC * rayC);
 	void	caluclate_ray_dist(t_rayC *rayC);
 	void	ray_dist_init(t_rayC *rayC);
@@ -94,14 +92,5 @@ typedef struct s_rayC
 	bool	rotate_left(t_rayC *rayC, int keycode);
 	bool	rotate_right(t_rayC *rayC, int keycode);
 	int     keys_handler(int key, t_mlx *mlx);
-
-
-
-
-
-
-
-
-
 
 #endif

@@ -1,16 +1,21 @@
 #include "inc/cub3d.h"
 
-int     main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	(void)ac;
 	(void)av;
 	t_data	data;
+	t_mlx	mlx_struct;
+	t_tex	tex_struct;
+
+	data.mlx = &mlx_struct;
+	data.tex = &tex_struct;
 
 //	check_map_error();
-	game_init(&data, &data);
-	mlx_hook(mlx.mlx_ptr, KeyPress, KeyPressMask, keys_handler, &data);
-	mlx_hook(mlx.mlx_ptr, KeyPress, KeyReleaseMask, keys_handler, data.(&mlx));
-	mlx_loop_hook(mlx.mlx_ptr, run_rayCast_game, keys_handler, &data);
+	game_init(&data);
+	// mlx_hook(data.mlx->mlx_ptr, KeyPress, KeyPressMask, keys_handler, &data);
+	// mlx_hook(data.mlx->mlx_ptr, KeyRelease, KeyReleaseMask, keys_handler, data.mlx);
+	// mlx_loop_hook(data.mlx->mlx_ptr, run_rayCast_game, keys_handler, &data);
 
 	//raycast starts here
 

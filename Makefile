@@ -1,5 +1,5 @@
 
-NAME = so_long
+NAME = cub3d
 
 SRCS	= 		main.c				\
 				init.c				\
@@ -31,21 +31,21 @@ all:	${NAME}
 		@$(CC) ${CFLAGS} -I$(INCS) -c $< -o $@
 
 ${NAME}:	${OBJS} ${MLX}
-		@${CC} ${CFLAGS} ${OBJS} ${MLX}  -lX11 -lXext -o so_long
-		@printf "%s\e[0;32m so_long : Compiling object file into executable\n\e[0m" "-"
+		@${CC} ${CFLAGS} ${OBJS} ${MLX}  -lX11 -lXext -o cub3d
+		@printf "%s\e[0;32m cub3d : Compiling object file into executable\n\e[0m" "-"
 
 ${MLX}:
 		@make -C mlx_linux --no-print-directory
 
 clean:
 		@${RM} ${OBJS}
-		@printf "%s\e[0;31m so_long : Delete all object files\n\e[0m" "-"
+		@printf "%s\e[0;31m cub3d : Delete all object files\n\e[0m" "-"
 
 fclean:
 		@${RM} ${OBJS}
-		@printf "%s\e[0;31m so_long : Delete all object files\n\e[0m" "-"
+		@printf "%s\e[0;31m cub3d : Delete all object files\n\e[0m" "-"
 		@${RM} ${NAME}
-		@printf "%s\e[0;31m so_long : Delete executable\n\e[0m" "-"
+		@printf "%s\e[0;31m cub3d : Delete executable\n\e[0m" "-"
 		@make clean -C mlx_linux --no-print-directory
 
 
