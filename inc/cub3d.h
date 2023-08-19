@@ -19,8 +19,8 @@
 #define KEY_DOWN 125
 #define KEY_LEFT 123
 #define KEY_RIGHT 124
-#define KEY_ROTATE_LEFT 97
-#define KEY_ROTATE_RIGHT 100
+#define ROTATE_LEFT_KEY 97
+#define ROTATE_RIGHT_KEY 100
 #define ROT_SPEED 0.1
 
 typedef struct s_tex
@@ -85,10 +85,10 @@ typedef struct s_rayC
 	void	calculate_step_and_side_dist(t_rayC *rayC);
 	void	member_init(t_rayC *rayC);
 
-	bool	move_forward(t_rayC *rayC, int keycode);
-	bool	move_backward(t_rayC *rayC, int keycode);
-	bool	move_left(t_rayC *rayC, int keycode);
-	bool	move_right(t_rayC *rayC, int keycode);
+	bool	move_forward(t_data *data, int keycode);
+	bool	move_backward(t_data *data, int keycode);
+	bool	move_left(t_data *data, int keycode);
+	bool	move_right(t_data *data, int keycode);
 	bool	rotate_left(t_rayC *rayC, int keycode);
 	bool	rotate_right(t_rayC *rayC, int keycode);
 	int     keys_handler(int key, t_mlx *mlx);

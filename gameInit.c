@@ -3,7 +3,7 @@
 void	game_init(t_data *data)
 {
 	data->mlx->mlx_ptr = mlx_init();
-	data->mlx->win = screen(data->mlx->mlx_ptr, MAP_HEIGHT, MAP_WIDTH, "Cub");
+	data->mlx->win = mlx_new_window(data->mlx->mlx_ptr, MAP_HEIGHT, MAP_WIDTH, "Cub");
 	if (!data->mlx->win)
 	{
 		write(2, "Mlx initialisation failed\n", 26);

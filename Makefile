@@ -2,8 +2,8 @@
 NAME = cub3d
 
 SRCS	= 		main.c				\
-				init.c				\
-				key_handler.c		\
+				gameInit.c			\
+				keyHandler.c		\
 				playerDirection.c	\
 				playerRotation.c	\
 				rayCast.c			\
