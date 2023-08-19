@@ -1,4 +1,4 @@
-
+#include "inc/cub3d.h"
 
 void	get_wallX(t_data *data, t_rayC *rayC)
 {
@@ -11,8 +11,8 @@ void	get_wallX(t_data *data, t_rayC *rayC)
 
 void	get_textX(t_data *data,t_rayC *rayC)
 {
-	rayC->texX = int(rayC->wallX * double(tex->width))
-	if (rayC->side == && data->dirX > 0)
+	rayC->texX = (int)(rayC->wallX * (double)(tex->width))
+	if (rayC->side == 0 && data->dirX > 0)
 		rayC->texX = tex->width - rayC->texX - 1;
 	if (rayC->side == 1 && rayC->data < 0)
 		rayC->texX = tex->width - rayC->texX - 1;

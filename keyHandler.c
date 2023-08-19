@@ -15,10 +15,10 @@ static void	free_all_and_quit(t_mlx *mlx)
 	exit(EXIT_SUCCESS);
 }
 
-int     keys_handler(int keycode, t_mlx *data)
+int     keys_handler(int keycode, t_data *data)
 {
 	if (keycode == XK_Escape)
-		free_all_and_quit(data->mlx_ptr);
+		free_all_and_quit(data->mlx->mlx_ptr);
 	if (move_forward(data, keycode) || move_backward(data, keycode)
 		|| move_left(data, keycode) || move_right(data, keycode)
 		|| rotate_left(data, keycode) || rotate_right(data, keycode))

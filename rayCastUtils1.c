@@ -2,11 +2,11 @@
 
 void	member_init(t_data *data, t_rayC *rayC)
 {
-	rayC->cameraX = 2 * x / double(MAP_WIDTH) - 1;
+	rayC->cameraX = 2 * MAP_WIDTH / (double)(MAP_WIDTH) - 1;
 	data->dirX = data->dirX + data->planeX * rayC->cameraX;
 	data->dirY = data->dirY + data->planeY * rayC->cameraX;
-	rayC->mapX = (int)(rayC->posX);
-	rayC->mapY = (int)(rayC->posY);
+	rayC->mapX = (int)(data->posX);
+	rayC->mapY = (int)(data->posY);
 	if (rayC->rayDirX == 0)
 		rayC->deltaDistX = 1e30;
 	else
@@ -28,7 +28,7 @@ void	init_step_and_side_dist(t_data *data, t_rayC *rayC)
 	else
 	{
 		rayC->stepX = 1;
-		rayC->sideDistX = (rayC->mapX + 1->0 - data->posX) * rayC->deltaDistX;
+		rayC->sideDistX = (rayC->mapX + 1.0 - data->posX) * rayC->deltaDistX;
 	}
 	if (rayC->rayDirY < 0)
 	{
@@ -38,7 +38,7 @@ void	init_step_and_side_dist(t_data *data, t_rayC *rayC)
 	else
 	{
 		rayC->stepY = 1;
-		cacl->sideDistY = (rayC->mapY + 1.0 - data->posY) * rayC->deltaDistY;
+		rayC->sideDistY = (rayC->mapY + 1.0 - data->posY) * rayC->deltaDistY;
 	}
 }
 

@@ -1,29 +1,35 @@
 #include "inc/cub3d.h"
 
-bool	rotate_left(t_rayC *rayC, int keycode)
+bool	rotate_left(t_data *data, int keycode)
 {
-	if (keycode != KEY_ROT_LEFT)
+	double	oldDirX;
+	double	oldPlaneX;
+
+	if (keycode != ROTATE_LEFT_KEY)
 		return (false);
 	 //both camera direction and camera plane must be rotated
-	double oldDirX = rayC->dirX;
-	rayC->dirX = rayC->dirX * cos(-rotSpeed) - rayC->dirY * sin(-rotSpeed);
-	rayC->dirY = oldDirX * sin(-rotSpeed) + rayC->dirY * cos(-rotSpeed);
-	rayC->oldPlaneX = planeX;
-	planeX = planeX * cos(-rotSpeed) - planeY * sin(-rotSpeed);
-	planeY = oldPlaneX * sin(-rotSpeed) + planeY * cos(-rotSpeed);
+	oldDirX = data->dirX;
+	data->dirX = data->dirX * cos(-ROT_SPEED) - data->dirY * sin(-ROT_SPEED);
+	data->dirY = oldDirX * sin(-ROT_SPEED) + data->dirY * cos(-ROT_SPEED);
+	oldPlaneX = data->planeX;
+	data->planeX = data->planeX * cos(-ROT_SPEED) - data->planeY * sin(-ROT_SPEED);
+	data->planeY = oldPlaneX * sin(-ROT_SPEED) + data->planeY * cos(-ROT_SPEED);
     return (true);
 
 }
 
-bool	rotate_right(t_rayC *rayC, int keycode)
+bool	rotate_right(t_data *data, int keycode)
 {
-	if (keycode != KEY_RIGHT)
+	double oldDirX;
+	double oldPlaneX;
+
+	if (keycode != ROTATE_RIGHT_KEY)
 		return (false);
-	double oldDirX = rayC->dirX;
-	dirX = rayC->dirX * cos(rotSpeed) - rayC->dirY * sin(rotSpeed);
-	rayC->dirY = oldDirX * sin(rotSpeed) + rayC->dirY * cos(rotSpeed);
-	double oldPlaneX = rayC->planeX;
-	rayC->planeX = rayC->planeX * cos(rotSpeed) - rayC->planeY * sin(rotSpeed);
-	rayC->planeY = oldPlaneX * sin(rotSpeed) + rayC->planeY * cos(rotSpeed);
+	oldDirX = data->dirX;
+	data->dirX = data->dirX * cos(ROT_SPEED) - data->dirY * sin(ROT_SPEED);
+	data->dirY = oldDirX * sin(ROT_SPEED) + data->dirY * cos(ROT_SPEED);
+	oldPlaneX = data->planeX;
+	data->planeX = data->planeX * cos(ROT_SPEED) - data->planeY * sin(ROT_SPEED);
+	data->planeY = oldPlaneX * sin(ROT_SPEED) + data->planeY * cos(ROT_SPEED);
     return (true);
 }

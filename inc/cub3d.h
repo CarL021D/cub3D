@@ -7,7 +7,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <math.h>
-// #include <cstdint.h>
+#include <stdint.h>
 #include <stdbool.h>
 
 #define MAP_WIDTH 24 
@@ -72,25 +72,28 @@ typedef struct s_rayC
 	double		deltaDistY;
 	int			stepX;
 	int			stepY;
+	double		rayDirX;
+	double		rayDirY;
 	int			drawStart;
 	int			drawEnd;
 
 }	t_rayC;
 
 	void	game_init(t_data *data);
-	int		run_rayCast_game(t_rayC * rayC);
-	void	caluclate_ray_dist(t_rayC *rayC);
+	int		run_rayCast(t_data * data);
+	void	draw_rays(t_rayC *rayC, t_tex *tex);
+	void	get_textX(t_data *data,t_rayC *rayC);
+	void	get_wallX(t_data *data, t_rayC *rayC);
 	void	ray_dist_init(t_rayC *rayC);
 	void	dda(t_rayC *rayC);
-	void	calculate_step_and_side_dist(t_rayC *rayC);
-	void	member_init(t_rayC *rayC);
-
+	void	init_step_and_side_dist(t_data *data, t_rayC *rayC);
+	void	member_init(t_data *data, t_rayC *rayC);
 	bool	move_forward(t_data *data, int keycode);
 	bool	move_backward(t_data *data, int keycode);
 	bool	move_left(t_data *data, int keycode);
 	bool	move_right(t_data *data, int keycode);
-	bool	rotate_left(t_rayC *rayC, int keycode);
-	bool	rotate_right(t_rayC *rayC, int keycode);
-	int     keys_handler(int key, t_mlx *mlx);
+	bool	rotate_left(t_data *data, int keycode);
+	bool	rotate_right(t_data *data, int keycode);
+	int     keys_handler(int key, t_data *data);
 
 #endif
