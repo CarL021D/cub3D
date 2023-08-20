@@ -20,3 +20,25 @@ int	run_rayCast(t_data *data)
 	}
 	return (1);
 }
+
+void	cast_tex(t_data *data, t_rayC *rayC)
+{
+	double	step;
+	double	texPos;
+	int		y;
+	int		texY;
+
+	step = 1.0 * data->tex->height * rayC->lineHeight;
+	texPos = (rayC->drawStart - SCREEN_HEIGHT / 2 + rayC->lineHeight / 2) * step;
+	y = rayC.drawStart;
+	while (y < rayC->drawEnd)
+	{
+		texY = (int)texPos;
+		texPos += step;
+
+		//Uint32 color = texture[texNum][texHeight * texY + texX];
+		//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
+		//if(side == 1) color = (color >> 1) & 8355711;
+		//buffer[y][x] = color;
+	}
+}

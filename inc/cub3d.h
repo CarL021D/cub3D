@@ -65,6 +65,7 @@ typedef struct s_rayC
 	int			lineHeight;
 	double		perpWallDist;
 	double		wallX;
+	int			color;
 	int			mapX;
 	int			mapY;
 	double		sideDistX;
