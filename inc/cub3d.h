@@ -45,7 +45,8 @@ typedef struct s_data
 {
 	t_mlx		*mlx;
 	t_tex		*tex;
-	int			*map[2];
+	char		**map;
+	// int			*map[2];
 	int			map_width;
 	int			map_height;
 	double		posX;
@@ -85,9 +86,9 @@ typedef struct s_rayC
 	void	get_textX(t_data *data,t_rayC *rayC);
 	void	get_wallX(t_data *data, t_rayC *rayC);
 	void	ray_dist_init(t_rayC *rayC);
-	void	dda(t_rayC *rayC);
+	void	dda(t_data *data, t_rayC *rayC);
 	void	init_step_and_side_dist(t_data *data, t_rayC *rayC);
-	void	member_init(t_data *data, t_rayC *rayC);
+	void	member_init(t_data *data, t_rayC *rayC, int x);
 	bool	move_forward(t_data *data, int keycode);
 	bool	move_backward(t_data *data, int keycode);
 	bool	move_left(t_data *data, int keycode);

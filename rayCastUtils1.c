@@ -1,8 +1,8 @@
 #include "inc/cub3d.h"
 
-void	member_init(t_data *data, t_rayC *rayC)
+void	member_init(t_data *data, t_rayC *rayC, int x)
 {
-	rayC->cameraX = 2 * MAP_WIDTH / (double)(MAP_WIDTH) - 1;
+	rayC->cameraX = 2 * x / (double)(MAP_WIDTH) - 1;
 	data->dirX = data->dirX + data->planeX * rayC->cameraX;
 	data->dirY = data->dirY + data->planeY * rayC->cameraX;
 	rayC->mapX = (int)(data->posX);
@@ -42,7 +42,7 @@ void	init_step_and_side_dist(t_data *data, t_rayC *rayC)
 	}
 }
 
-void	dda(t_rayC *rayC)
+void	dda(t_data *data, t_rayC *rayC)
 {
 	while (rayC->hit == 0)
 	{
@@ -58,7 +58,7 @@ void	dda(t_rayC *rayC)
 			rayC->mapY += rayC->stepY;
 			rayC->side = 1;
 		}
-		if (rayC->worldMap[rayC->mapX][rayC->mapY] > 0)
+		if (data->map[rayC->mapX][rayC->mapY] > 0)
 			rayC->hit = 1;
 	}
 }

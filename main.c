@@ -8,6 +8,7 @@ int	main(int ac, char **av)
 	t_mlx	mlx_struct;
 	t_tex	tex_struct;
 
+	// set int game init
 	data.mlx = &mlx_struct;
 	data.tex = &tex_struct;
 
