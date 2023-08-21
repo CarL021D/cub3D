@@ -11,11 +11,11 @@ void	get_wallX(t_data *data, t_rayC *rayC)
 
 void	get_textX(t_data *data,t_rayC *rayC)
 {
-	rayC->texX = (int)(rayC->wallX * (double)(tex->width))
+	rayC->texX = (int)(rayC->wallX * (double)(data->tex->width))
 	if (rayC->side == 0 && data->dirX > 0)
-		rayC->texX = tex->width - rayC->texX - 1;
+		rayC->texX = data->tex->width - rayC->texX - 1;
 	if (rayC->side == 1 && rayC->data < 0)
-		rayC->texX = tex->width - rayC->texX - 1;
+		rayC->texX = data->tex->width - rayC->texX - 1;
 }
 
 void	draw_rays(t_rayC *rayC, t_tex *tex)
