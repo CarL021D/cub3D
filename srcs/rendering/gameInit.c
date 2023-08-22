@@ -77,7 +77,7 @@ void	game_init(t_data *data)
 		write(2, "Mlx initialisation failed\n", 26);
 		exit(1);
 	}
-	player_pos_init(data);
+	// player_pos_init(data);
 
 	
 	// data_init();

@@ -8,18 +8,28 @@ int	main(int ac, char **av)
 	t_mlx	mlx_struct;
 	t_tex	tex_struct;
 
-	// set int game init
 	data.mlx = &mlx_struct;
 	data.tex = &tex_struct;
 
-//	check_map_error();
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+	data.map_height = 24;
+	data.map_width = 24;
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+	// Parsing;
 	game_init(&data);
 	mlx_hook(data.mlx->mlx_ptr, KeyPress, KeyPressMask, keys_handler, &data);
 	mlx_hook(data.mlx->mlx_ptr, KeyRelease, KeyReleaseMask, keys_handler, data.mlx);
 	mlx_loop_hook(data.mlx->mlx_ptr, run_rayCast, &data);
 	// mlx_loop();
 
-	//raycast starts here
+
+// 0 < drawstart 		ceilling
+// drawStart < drawEnd	wall
+// drawEnd < lowScreen	 define WINHEIGHT
+
 
 
 // for(int y = 0; y < texHeight; y++)
@@ -36,46 +46,5 @@ int	main(int ac, char **av)
 // 	texture[5][texWidth * y + x] = 65536 * 192 * (x % 16 && y % 16); //red bricks
 // 	texture[6][texWidth * y + x] = 65536 * ycolor; //red gradient
 // 	texture[7][texWidth * y + x] = 128 + 256 * 128 + 65536 * 128; //flat grey texture
+
 }
-
-
-
-	
-// void	get_wallX(t_rayC *rayC)
-// {
-// 	if (rayC.side == 0)
-// 		rayC.wallX = rayC.posY + rayC.perpWallDist * rayC.dirY;
-// 	else
-// 		rayC.wallX = rayC.posX + rayC.perpWallDist * rayC.dirX;
-// 	rayC.wallX -= floor(rayC.wallX); 
-// }
-
-// double	get_textX(t_rayC *rayC, t_tex *tex)
-// {
-// 	rayC.texX = int(rayC.wallX * double(tex.width))
-// 	if (rayC.side == && rayC.dirX > 0)
-// 		texX = tex.width - texX - 1;
-// 	if (rayC.side == 1 && rayC.dirY < 0)
-// 		texX = tex.width - texX - 1;
-// 	return (texX);
-// }
-
-// void	draw_ray(t_rayC *rayC, t_tex *tex, int32_t texX)
-// {
-// 	int		y;
-// 	int		texY;
-// 	double	step;
-// 	double	texPos;
-
-// 	y = rayC.drawStart;
-// 	step = 1.0 * tex.height / rayC.lineHeight;
-// 	texPos = (rayC.drawStart - MAP_HEIGHT / 2 + rayC.lineHeight / 2) * step;
-// 	while (y < rayC.drawEnd)
-// 	{
-// 		texY = (int)texPos & (tex.height - 1);
-//         texPos += step;
-
-// 		// TO DO
-//         // Uint32 color = texture[texNum][texHeight * texY + texX];     
-// 	}
-// }
