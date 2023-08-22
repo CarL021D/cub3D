@@ -1,8 +1,8 @@
-#include "inc/cub3d.h"
+#include "../../inc/cub3d.h"
 
 void	member_init(t_data *data, t_rayC *rayC, int x)
 {
-	rayC->cameraX = 2 * x / (double)(MAP_WIDTH) - 1;
+	rayC->cameraX = 2 * x / (double)(data->map_width) - 1;
 	data->dirX = data->dirX + data->planeX * rayC->cameraX;
 	data->dirY = data->dirY + data->planeY * rayC->cameraX;
 	rayC->mapX = (int)(data->posX);

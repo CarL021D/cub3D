@@ -1,4 +1,4 @@
-#include "inc/cub3d.h"
+#include "../../inc/cub3d.h"
 
 static void	free_all_and_quit(t_mlx *mlx)
 {

@@ -1,4 +1,4 @@
-#include "inc/cub3d.h"
+#include "../../inc/cub3d.h"
 
 bool	rotate_left(t_data *data, int keycode)
 {

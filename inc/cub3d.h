@@ -10,10 +10,8 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#define MAP_WIDTH 24 
-#define MAP_HEIGHT 24
-#define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
+#define SCREEN_WIDTH 640
 
 #define KEY_UP 126
 #define KEY_DOWN 125
@@ -46,7 +44,6 @@ typedef struct s_data
 	t_mlx		*mlx;
 	t_tex		*tex;
 	char		**map;
-	// int			*map[2];
 	int			map_width;
 	int			map_height;
 	double		posX;
@@ -55,6 +52,18 @@ typedef struct s_data
 	double		dirY;
 	double		planeX;
 	double		planeY;
+
+
+	char *path_no;
+	char *path_so;
+	char *path_ea;
+	char *path_we;
+	char *ceiling_color;
+	char *floor_color;
+	int nb_data;
+	char *map_simple;
+
+
 }	t_data;
 
 typedef struct s_rayC
@@ -65,6 +74,7 @@ typedef struct s_rayC
 	int			lineHeight;
 	double		perpWallDist;
 	double		wallX;
+	int			texX;
 	int			color;
 	int			mapX;
 	int			mapY;
@@ -84,8 +94,8 @@ typedef struct s_rayC
 	void	game_init(t_data *data);
 	int		run_rayCast(t_data * data);
 	void	draw_rays(t_rayC *rayC, t_tex *tex);
-	void	get_textX(t_data *data,t_rayC *rayC);
-	void	get_wallX(t_data *data, t_rayC *rayC);
+	// void	get_wallX(t_data *data, t_rayC *rayC);
+	// void	get_textX(t_data *data,t_rayC *rayC);
 	void	ray_dist_init(t_rayC *rayC);
 	void	dda(t_data *data, t_rayC *rayC);
 	void	init_step_and_side_dist(t_data *data, t_rayC *rayC);
