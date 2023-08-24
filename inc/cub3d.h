@@ -24,10 +24,10 @@
 typedef struct s_tex
 {
 	void *img_ptr;       // Pointer to the loaded image
-	char *data;          // Pointer to the pixel data
+	char *addr;          // Pointer to the pixel data
 	int width;           // Width of the texture
 	int height;          // Height of the texture
-	int bits_per_pixel;  // Bits per pixel for the texture
+	int bpp;			 // Bits per pixel for the texture
 	int size_line;       // Bytes per line in the texture
 	int endian;          // Endianness information
 }	t_tex;
@@ -36,13 +36,12 @@ typedef struct s_mlx
 {
 	void		*mlx_ptr;
 	void		*win;
-	void		*img[4];
 }	t_mlx;
 
 typedef struct s_data
 {
 	t_mlx		*mlx;
-	t_tex		*tex;
+	t_tex		tex[4];
 	char		**map;
 	int			map_width;
 	int			map_height;
@@ -54,14 +53,15 @@ typedef struct s_data
 	double		planeY;
 
 
-	char *path_no;
-	char *path_so;
-	char *path_ea;
-	char *path_we;
-	char *ceiling_color;
-	char *floor_color;
-	int nb_data;
-	char *map_simple;
+
+	char	*path_no;
+	char	*path_so;
+	char	*path_ea;
+	char	*path_we;
+	char	ceiling_color;
+	int		floor_color;
+	int		nb_data;
+	char	*map_simple;
 
 
 }	t_data;

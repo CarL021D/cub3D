@@ -68,8 +68,80 @@ static void	player_pos_init(t_data *data)
 	}
 }
 
+void	fill_textures(t_data *data, int i)
+{
+	t_tex	*tmp;
+	int		x;
+	int		y;
+	int		i;
+
+	i = 0;
+	tmp = data->tex;
+	while (i < 4)
+	{
+		if (i == 0){
+			data->tex[i]->img_ptr[i] = mlx_xpm_file_to_img(data->mlx_ptr,
+				path, &data->tex[i].width, &data->tex[i].height);
+			if (data->tex[i]->img_ptr[i] == NULL)
+				// Free
+		}
+		if (i == 1)
+		{
+			data->tex[i]->img_ptr[i] = mlx_xpm_file_to_img(data->mlx_ptr,
+				path, &data->tex[i].width, &data->tex[i].height);
+			if (data->tex[i]->img_ptr[i] == NULL)
+				// Free
+		}
+		if (i == 2)
+		{
+			data->tex[i]->img_ptr[i] = mlx_xpm_file_to_img(data->mlx_ptr,
+				path, &data->tex[i].width, &data->tex[i].height);
+			if (data->tex[i]->img_ptr[i] == NULL)
+				// Free
+		}
+		if (i == 3)
+		{
+			data->tex[i]->img_ptr[i] = mlx_xpm_file_to_img(data->mlx_ptr,
+				path, &data->tex[i].width, &data->tex[i].height);
+			if (data->tex[i]->img_ptr[i] == NULL)
+				// Free
+		}
+		data->text[i].addr = (int *)mlx_get_data_addr(data->text[i].img,
+			&data->text[i].bpp, &data->text[i].size_line, &data->text[i].endian);
+		x = 0;
+		while (x < data->tex[i]->width)
+		{
+			y = 0;
+			while (y < data->tex[i]->height)
+			{
+				// for(int y = 0; y < texHeight; y++)
+				//   {
+				// 	int xorcolor = (x * 256 / texWidth) ^ (y * 256 / texHeight);
+				// 	//int xcolor = x * 256 / texWidth;
+				// 	int ycolor = y * 256 / texHeight;
+				// 	int xycolor = y * 128 / texHeight + x * 128 / texWidth;
+				// 	texture[0][texWidth * y + x] = 65536 * 254 * (x != y && x != texWidth - y); //flat red texture with black cross
+				// 	texture[1][texWidth * y + x] = xycolor + 256 * xycolor + 65536 * xycolor; //sloped greyscale
+				// 	texture[2][texWidth * y + x] = 256 * xycolor + 65536 * xycolor; //sloped yellow gradient
+				// 	texture[3][texWidth * y + x] = xorcolor + 256 * xorcolor + 65536 * xorcolor; //xor greyscale
+				// 	texture[4][texWidth * y + x] = 256 * xorcolor; //xor green
+				// 	texture[5][texWidth * y + x] = 65536 * 192 * (x % 16 && y % 16); //red bricks
+				// 	texture[6][texWidth * y + x] = 65536 * ycolor; //red gradient
+				// 	texture[7][texWidth * y + x] = 128 + 256 * 128 + 65536 * 128; //flat grey texture
+
+				y++;
+			}
+			x++;
+		}
+		mlx_destroy_image(data->mlx_ptr, data->tex[i].img_ptr);
+		i++;
+	}
+}
+
 void	game_init(t_data *data)
 {
+	int		i;
+
 	data->mlx->mlx_ptr = mlx_init();
 	data->mlx->win = mlx_new_window(data->mlx->mlx_ptr, SCREEN_HEIGHT, SCREEN_WIDTH, "Cub");
 	if (!data->mlx->win)
@@ -78,7 +150,9 @@ void	game_init(t_data *data)
 		exit(1);
 	}
 	// player_pos_init(data);
-
+	i = 0;
+	while (i < 4)
+		data->text
 	
 	// data_init();
 	// mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);

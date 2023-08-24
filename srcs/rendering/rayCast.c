@@ -12,7 +12,6 @@ int	run_rayCast(t_data *data)
 {
 	t_rayC			rayC;
 	int				x;
-	// int32_t		texX;
 
 	x = 0;
 	while (x < data->map_width)
