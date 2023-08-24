@@ -39,7 +39,6 @@ static bool		is_west_or_esth_pos(t_data *data, char c)
 		data->dirY = 1;
 		data->planeX = 0.66;
 		data->planeY = 0;
-
 	}
 	return (true);
 }
@@ -68,7 +67,28 @@ static void	player_pos_init(t_data *data)
 	}
 }
 
-void	fill_textures(t_data *data, int i)
+void	textures_init(t_data *data)
+{
+	if (i == 0)
+		data->tex->img_ptr = mlx_xpm_file_to_img(data->mlx_ptr,
+			data->path_no, &data->tex.width, &data->tex.height);
+	if (i == 1)
+		data->tex->img_ptr = mlx_xpm_file_to_img(data->mlx_ptr,
+			data->path_so, &data->tex.width, &data->tex.height);
+	if (i == 2)
+		data->tex->img_ptr = mlx_xpm_file_to_img(data->mlx_ptr,
+			data->path_we, &data->tex.width, &data->tex.height);
+	if (i == 3)
+		data->tex->img_ptr = mlx_xpm_file_to_img(data->mlx_ptr,
+			data->path_ea, &data->tex.width, &data->tex.height);
+	if (data->tex->img_ptr == NULL)
+			// Free and exit
+
+	data->text.addr = (int *)mlx_get_data_addr(data->text.img,
+		&data->text.bpp, &data->text.size_line, &data->text.endian);
+}
+
+void	fill_textures(t_data *data)
 {
 	t_tex	*tmp;
 	int		x;
@@ -79,41 +99,19 @@ void	fill_textures(t_data *data, int i)
 	tmp = data->tex;
 	while (i < 4)
 	{
-		if (i == 0){
-			data->tex[i]->img_ptr[i] = mlx_xpm_file_to_img(data->mlx_ptr,
-				path, &data->tex[i].width, &data->tex[i].height);
-			if (data->tex[i]->img_ptr[i] == NULL)
-				// Free
-		}
-		if (i == 1)
-		{
-			data->tex[i]->img_ptr[i] = mlx_xpm_file_to_img(data->mlx_ptr,
-				path, &data->tex[i].width, &data->tex[i].height);
-			if (data->tex[i]->img_ptr[i] == NULL)
-				// Free
-		}
-		if (i == 2)
-		{
-			data->tex[i]->img_ptr[i] = mlx_xpm_file_to_img(data->mlx_ptr,
-				path, &data->tex[i].width, &data->tex[i].height);
-			if (data->tex[i]->img_ptr[i] == NULL)
-				// Free
-		}
-		if (i == 3)
-		{
-			data->tex[i]->img_ptr[i] = mlx_xpm_file_to_img(data->mlx_ptr,
-				path, &data->tex[i].width, &data->tex[i].height);
-			if (data->tex[i]->img_ptr[i] == NULL)
-				// Free
-		}
-		data->text[i].addr = (int *)mlx_get_data_addr(data->text[i].img,
-			&data->text[i].bpp, &data->text[i].size_line, &data->text[i].endian);
+		data->tex[i]->img_ptr = NULL;
+		data->text[i].addr = NULL;
+
+		fill_textures(data);		
+		
 		x = 0;
 		while (x < data->tex[i]->width)
 		{
 			y = 0;
 			while (y < data->tex[i]->height)
 			{
+				data->texture[i][data->tex[i]->width * y + x] =
+					data->tex[i]->addr[data->tex[i]->width * y + x];
 				// for(int y = 0; y < texHeight; y++)
 				//   {
 				// 	int xorcolor = (x * 256 / texWidth) ^ (y * 256 / texHeight);
