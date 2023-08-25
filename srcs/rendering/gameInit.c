@@ -21,7 +21,6 @@ static bool		is_north_or_south_pos(t_data *data, char c)
 	return (true);
 }
 
-
 static bool		is_west_or_esth_pos(t_data *data, char c)
 {
 	if (c != 'W' || c != 'E')
