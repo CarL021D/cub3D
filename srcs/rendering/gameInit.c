@@ -69,6 +69,8 @@ static void	player_pos_init(t_data *data)
 
 void	textures_init(t_data *data)
 {
+	data->tex[i]->img_ptr = NULL;
+	data->text[i].addr = NULL;
 	if (i == 0)
 		data->tex->img_ptr = mlx_xpm_file_to_img(data->mlx_ptr,
 			data->path_no, &data->tex.width, &data->tex.height);
@@ -98,12 +100,8 @@ void	fill_textures(t_data *data)
 	i = 0;
 	tmp = data->tex;
 	while (i < 4)
-	{
-		data->tex[i]->img_ptr = NULL;
-		data->text[i].addr = NULL;
-
-		fill_textures(data);		
-		
+	{		
+		textures_init(data);
 		x = 0;
 		while (x < data->tex[i]->width)
 		{
@@ -147,11 +145,8 @@ void	game_init(t_data *data)
 		write(2, "Mlx initialisation failed\n", 26);
 		exit(1);
 	}
-	// player_pos_init(data);
-	i = 0;
-	while (i < 4)
-		data->text
-	
+	player_pos_init(data);
+	fill_textures(data);
 	// data_init();
 	// mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 
