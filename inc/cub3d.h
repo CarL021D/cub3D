@@ -40,7 +40,6 @@ typedef struct s_mlx
 
 typedef struct s_data
 {
-	t_mlx		*mlx;
 	t_tex		tex[4];
 	char		**map;
 	int			map_width;
@@ -58,7 +57,7 @@ typedef struct s_data
 	char	*path_so;
 	char	*path_we;
 	char	*path_ea;
-	char	ceiling_color;
+	int		ceiling_color;
 	int		floor_color;
 	int		nb_data;
 	char	*map_simple;
@@ -93,7 +92,7 @@ typedef struct s_rayC
 }	t_rayC;
 
 	void	game_init(t_data *data);
-	int		run_rayCast(t_data * data);
+	void		launch_rays(t_data * data);
 	void	draw_rays(t_rayC *rayC, t_tex *tex);
 	// void	get_wallX(t_data *data, t_rayC *rayC);
 	// void	get_textX(t_data *data,t_rayC *rayC);

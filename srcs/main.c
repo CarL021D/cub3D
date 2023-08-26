@@ -25,7 +25,7 @@ int	main(int ac, char **av)
 	game_init(&data);
 	mlx_hook(data.mlx->mlx_ptr, KeyPress, KeyPressMask, keys_handler, &data);
 	mlx_hook(data.mlx->mlx_ptr, KeyRelease, KeyReleaseMask, keys_handler, data.mlx);
-	mlx_loop_hook(data.mlx->mlx_ptr, run_rayCast, &data);
+	mlx_loop_hook(data.mlx->mlx_ptr, launch_rays, &data);
 	mlx_loop(data.mlx_ptr);
 
 

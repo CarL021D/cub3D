@@ -58,6 +58,7 @@ static void	player_pos_init(t_data *data)
 			{
 				data->posX = x;
 				data->posY = y;
+				data->map[x][y] = '0';
 				return ;
 			}
 			y++;
@@ -144,6 +145,7 @@ void	game_init(t_data *data)
 		write(2, "Mlx initialisation failed\n", 26);
 		exit(1);
 	}
+	// ft_memset(rayC) 0;
 	player_pos_init(data);
 	fill_textures(data);
 	// data_init();

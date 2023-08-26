@@ -8,7 +8,7 @@ void rayC_init(t_rayC *rayC)
 	rayC->rayDirY = 0;
 }
 
-int	run_rayCast(t_data *data)
+void	launch_rays(t_data *data)
 {
 	t_rayC			rayC;
 	int				x;
@@ -22,10 +22,10 @@ int	run_rayCast(t_data *data)
 		ray_dist_init(&rayC);
 		// get_wallX(data, &rayC);
 		// get_textX(data, &rayC);
-		// draw_rays(data, &rayC);
+		draw_rays(data, &rayC, x);
 		x++;
 	}
-	return (1);
+	mlx_put_image_to_window(data->mlx->mlx_ptr, data->mlx->win, data->tex[0]->img_ptr, 0, 0);
 }
 
 // void	cast_tex(t_data *data, t_rayC *rayC)
