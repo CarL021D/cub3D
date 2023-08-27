@@ -14,7 +14,7 @@ void	launch_rays(t_data *data)
 	int				x;
 
 	x = 0;
-	while (x < data->map_width)
+	while (x < SCREEN_WIDTH)
 	{
 		member_init(data, &rayC, x);
 		init_step_and_side_dist(data, &rayC);

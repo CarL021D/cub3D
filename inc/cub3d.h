@@ -42,8 +42,6 @@ typedef struct s_data
 {
 	t_tex		tex[4];
 	char		**map;
-	int			map_width;
-	int			map_height;
 	double		posX;
 	double		posY;
 	double		dirX;
