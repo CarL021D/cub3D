@@ -69,24 +69,24 @@ static void	player_pos_init(t_data *data)
 
 static void	textures_init(t_data *data, int i)
 {
-	data->tex[i].img = NULL;
+	data->tex[i]->img = NULL;
 	if (i == 0)
-		data->tex[i].img = mlx_xpm_file_to_image(data->mlx,
-			data->path_no, &data->tex[i].width, &data->tex[i].height);
+		data->tex[i]->img = mlx_xpm_file_to_image(data->mlx,
+			data->path_no, &data->tex[i]->width, &data->tex[i]->height);
 	if (i == 1)
-		data->tex[i].img = mlx_xpm_file_to_image(data->mlx,
-			data->path_so, &data->tex[i].width, &data->tex[i].height);
+		data->tex[i]->img = mlx_xpm_file_to_image(data->mlx,
+			data->path_so, &data->tex[i]->width, &data->tex[i]->height);
 	if (i == 2)
-		data->tex[i].img = mlx_xpm_file_to_image(data->mlx,
-			data->path_we, &data->tex[i].width, &data->tex[i].height);
+		data->tex[i]->img = mlx_xpm_file_to_image(data->mlx,
+			data->path_we, &data->tex[i]->width, &data->tex[i]->height);
 	if (i == 3)
-		data->tex[i].img = mlx_xpm_file_to_image(data->mlx,
-			data->path_ea, &data->tex[i].width, &data->tex[i].height);
-	// if (data->tex[i].img == NULL)
+		data->tex[i]->img = mlx_xpm_file_to_image(data->mlx,
+			data->path_ea, &data->tex[i]->width, &data->tex[i]->height);
+	// if (data->tex[i]->img == NULL)
 			// Free and exit
 
-	data->tex[i].addr = mlx_get_data_addr(data->tex[i].img,
-		&data->tex[i].bpp, &data->tex[i].size_line, &data->tex[i].endian);
+	data->tex[i]->addr = mlx_get_data_addr(data->tex[i]->img,
+		&data->tex[i]->bpp, &data->tex[i]->size_line, &data->tex[i]->endian);
 }
 
 void	fill_textures(t_data *data)
@@ -100,13 +100,13 @@ void	fill_textures(t_data *data)
 	{		
 		textures_init(data, i);
 		x = 0;
-		while (x < data->tex[i].width)
+		while (x < data->tex[i]->width)
 		{
 			y = 0;
-			while (y < data->tex[i].height)
+			while (y < data->tex[i]->height)
 			{
-				data->texture[i][data->tex[i].width * y + x] =
-					data->tex[i].addr[data->tex[i].width * y + x];
+				data->texture[i][data->tex[i]->width * y + x] =
+					data->tex[i]->addr[data->tex[i]->width * y + x];
 				// for(int y = 0; y < texHeight; y++)
 				//   {
 				// 	int xorcolor = (x * 256 / texWidth) ^ (y * 256 / texHeight);
@@ -126,7 +126,7 @@ void	fill_textures(t_data *data)
 			}
 			x++;
 		}
-		mlx_destroy_image(data->mlx, data->tex[i].img);
+		mlx_destroy_image(data->mlx, data->tex[i]->img);
 		i++;
 	}
 }
@@ -142,6 +142,16 @@ void	game_init(t_data *data)
 		write(2, "Mlx initialisation failed\n", 26);
 		exit(1);
 	}
+
+	data->buffer[0] = malloc(sizeof(t_tex));
+	data->buffer[0]->img = mlx_new_image(data->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
+	data->buffer[0]->addr = mlx_get_data_addr(data->buffer[0]->img, &data->buffer[0]->bpp, &data->buffer[0]->size_line, &data->buffer[0]->endian);
+
+	data->buffer[1] = malloc(sizeof(t_tex));
+	data->buffer[1]->img = mlx_new_image(data->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
+	data->buffer[1]->addr = mlx_get_data_addr(data->buffer[1]->img, &data->buffer[1]->bpp, &data->buffer[1]->size_line, &data->buffer[0]->endian);
+
+
 	// ft_memset(rayC) 0;
 	player_pos_init(data);
 	// fill_textures(data);

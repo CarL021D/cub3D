@@ -19,11 +19,8 @@ int	main(int ac, char **av)
         data.map[i][7] = '1';
         data.map[0][i] = '1';
         data.map[7][i] = '1';
-    }
-
-	for (int i = 0; i < 8; i++)
 		data.map[i][8] = '\0';
-
+    }
 	data.map[8] = NULL;
 
     // Set interior to '0'
@@ -32,9 +29,7 @@ int	main(int ac, char **av)
             data.map[i][j] = '0';
         }
     }
-
 	data.map[3][4] = 'N';
-
     // Print the data.map
     for (int i = 0; data.map[i]; i++) {
         for (int j = 0; data.map[i][j]; j++) {
@@ -44,12 +39,14 @@ int	main(int ac, char **av)
     }
     printf("\n");
 
+	data.ceiling_color = 0xF0F8FF;
+	data.floor_color = 0x808080;
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 	// Parsing;
 	game_init(&data);
-	// mlx_hook(data.mlx_win, KeyPress, KeyPressMask, keys_handler, &data);
-	// mlx_hook(data.mlx_win, KeyRelease, KeyReleaseMask, keys_handler, &data);
+	mlx_hook(data.mlx_win, KeyPress, KeyPressMask, keys_handler, &data);
+	mlx_hook(data.mlx_win, KeyRelease, KeyReleaseMask, keys_handler, &data);
 	// mlx_loop_hook(data.mlx, draw_on_screen, &data);
 	mlx_loop(data.mlx);
 

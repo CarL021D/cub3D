@@ -25,7 +25,7 @@ int	draw_on_screen(t_data *data)
 		draw_rays(data, &rayC, x);
 		x++;
 	}
-	// mlx_put_image_to_window(data->mlx, data->mlx_win, data->tex[0].img, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->mlx_win, data->buffer[0]->img, 0, 0);
 	return (1);
 }
 

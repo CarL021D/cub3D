@@ -36,11 +36,8 @@ typedef struct s_data
 {
 	void		*mlx;
 	void		*mlx_win;
-	t_tex		tex[4];
-	
+	t_tex		*tex[4];
 	char		**map;
-
-
 	double		posX;
 	double		posY;
 	double		dirX;
@@ -48,7 +45,7 @@ typedef struct s_data
 	double		planeX;
 	double		planeY;
 
-
+	t_tex		*buffer[2];
 
 	char	*path_no;
 	char	*path_so;
