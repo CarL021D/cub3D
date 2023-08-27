@@ -23,8 +23,8 @@
 
 typedef struct s_tex
 {
-	void	*img_ptr;       // Pointer to the loaded image
-	char 	*addr;          // Pointer to the pixel data
+	void	*img;       // Pointer to the loaded image
+	char	*addr;          // Pointer to the pixel data
 	int		width;           // Width of the texture
 	int		height;          // Height of the texture
 	int		bpp;			 // Bits per pixel for the texture
@@ -32,16 +32,15 @@ typedef struct s_tex
 	int		endian;          // Endianness information
 }	t_tex;
 
-typedef struct s_mlx
-{
-	void		*mlx_ptr;
-	void		*win;
-}	t_mlx;
-
 typedef struct s_data
 {
+	void		*mlx;
+	void		*mlx_win;
 	t_tex		tex[4];
+	
 	char		**map;
+
+
 	double		posX;
 	double		posY;
 	double		dirX;
@@ -90,8 +89,8 @@ typedef struct s_rayC
 }	t_rayC;
 
 	void	game_init(t_data *data);
-	void		launch_rays(t_data * data);
-	void	draw_rays(t_rayC *rayC, t_tex *tex);
+	int		draw_on_screen(t_data * data);
+	void	draw_rays(t_data *data, t_rayC *rayC, int x);
 	// void	get_wallX(t_data *data, t_rayC *rayC);
 	// void	get_textX(t_data *data,t_rayC *rayC);
 	void	ray_dist_init(t_rayC *rayC);

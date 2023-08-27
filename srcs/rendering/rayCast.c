@@ -8,7 +8,7 @@ void rayC_init(t_rayC *rayC)
 	rayC->rayDirY = 0;
 }
 
-void	launch_rays(t_data *data)
+int	draw_on_screen(t_data *data)
 {
 	t_rayC			rayC;
 	int				x;
@@ -25,7 +25,8 @@ void	launch_rays(t_data *data)
 		draw_rays(data, &rayC, x);
 		x++;
 	}
-	mlx_put_image_to_window(data->mlx->mlx_ptr, data->mlx->win, data->tex[0]->img_ptr, 0, 0);
+	// mlx_put_image_to_window(data->mlx, data->mlx_win, data->tex[0].img, 0, 0);
+	return (1);
 }
 
 // void	cast_tex(t_data *data, t_rayC *rayC)

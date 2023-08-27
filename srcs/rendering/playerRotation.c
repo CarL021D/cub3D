@@ -14,8 +14,7 @@ bool	rotate_left(t_data *data, int keycode)
 	oldPlaneX = data->planeX;
 	data->planeX = data->planeX * cos(-ROT_SPEED) - data->planeY * sin(-ROT_SPEED);
 	data->planeY = oldPlaneX * sin(-ROT_SPEED) + data->planeY * cos(-ROT_SPEED);
-    return (true);
-
+	return (true);
 }
 
 bool	rotate_right(t_data *data, int keycode)
@@ -31,5 +30,5 @@ bool	rotate_right(t_data *data, int keycode)
 	oldPlaneX = data->planeX;
 	data->planeX = data->planeX * cos(ROT_SPEED) - data->planeY * sin(ROT_SPEED);
 	data->planeY = oldPlaneX * sin(ROT_SPEED) + data->planeY * cos(ROT_SPEED);
-    return (true);
+	return (true);
 }

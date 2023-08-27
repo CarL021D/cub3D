@@ -1,24 +1,24 @@
 #include "../../inc/cub3d.h"
 
-static void	free_all_and_quit(t_mlx *mlx)
+static void	free_all_and_exit(t_data *data)
 {
-	if (mlx->img[0] != NULL)
-		mlx_destroy_image(mlx->mlx_ptr, mlx->img[0]);
-	if (mlx->img[1] != NULL)
-		mlx_destroy_image(mlx->mlx_ptr, mlx->img[1]);
-	if (mlx->img[2] != NULL)
-		mlx_destroy_image(mlx->mlx_ptr, mlx->img[2]);
-	if (mlx->img[3] != NULL)
-		mlx_destroy_image(mlx->mlx_ptr, mlx->img[3]);
-	mlx_destroy_window(mlx, mlx->win);
-    mlx_destroy_display(mlx);
+	// if (data->tex[0].img != NULL)
+	// 	mlx_destroy_image(data->mlx, data->tex[0].img);
+	// if (data->tex[1].img != NULL)
+	// 	mlx_destroy_image(data->mlx, data->tex[1].img);
+	// if (data->tex[2].img != NULL)
+	// 	mlx_destroy_image(data->mlx, data->tex[2].img);
+	// if (data->tex[3].img != NULL)
+	// 	mlx_destroy_image(data->mlx, data->tex[3].img);
+	mlx_destroy_window(data->mlx, data->mlx_win);
+    mlx_destroy_display(data->mlx);
 	exit(EXIT_SUCCESS);
 }
 
 int     keys_handler(int keycode, t_data *data)
 {
 	if (keycode == XK_Escape)
-		free_all_and_quit(data->mlx->mlx_ptr);
+		free_all_and_exit(data);
 	if (move_forward(data, keycode) || move_backward(data, keycode)
 		|| move_left(data, keycode) || move_right(data, keycode)
 		|| rotate_left(data, keycode) || rotate_right(data, keycode))
