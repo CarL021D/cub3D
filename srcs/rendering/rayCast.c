@@ -13,6 +13,10 @@ int	draw_on_screen(t_data *data)
 	t_rayC			rayC;
 	int				x;
 
+// - - - - - - - 
+	data->current_buffer = 0;
+// - - - - - - - 
+
 	x = 0;
 	while (x < SCREEN_WIDTH)
 	{
@@ -26,6 +30,7 @@ int	draw_on_screen(t_data *data)
 		x++;
 	}
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->buffer[0]->img, 0, 0);
+	data->current_buffer = (data->current_buffer + 1) % 2;
 	return (1);
 }
 

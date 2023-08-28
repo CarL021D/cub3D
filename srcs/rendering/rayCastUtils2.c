@@ -40,16 +40,15 @@ void	draw_rays(t_data *data, t_rayC *rayC, int x)
 	// }
 	int		y;
 	int wall_color = 0xFF0FF;
-	
 	y = 0;
 	while (y < SCREEN_WIDTH)
 	{
 		if (y < rayC->drawStart)
-			data->buffer[0]->addr[y * SCREEN_WIDTH + x] = data->ceiling_color;
+			data->buffer[data->current_buffer]->addr[y * SCREEN_WIDTH + x] = data->ceiling_color;
 		else if (y > rayC->drawEnd)
-			data->buffer[0]->addr[y * SCREEN_WIDTH + x] = data->floor_color;
+			data->buffer[data->current_buffer]->addr[y * SCREEN_WIDTH + x] = data->floor_color;
 		else
-			data->buffer[0]->addr[y * SCREEN_WIDTH + x] = wall_color;
+			data->buffer[data->current_buffer]->addr[y * SCREEN_WIDTH + x] = wall_color;
 		y++;
 	}
 }

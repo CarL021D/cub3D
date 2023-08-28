@@ -58,6 +58,8 @@ typedef struct s_data
 
 	int		*texture[4];
 
+	int current_buffer;
+
 }	t_data;
 
 typedef struct s_rayC
