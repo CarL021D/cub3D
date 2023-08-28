@@ -2,14 +2,13 @@
 
 static bool		is_north_or_south_pos(t_data *data, char c)
 {
-	if (c != 'N' || c != 'S')
-		return (false);
-	else if (c == 'N')
+	if (c == 'N')
 	{
 		data->dirX = 1;
 		data->dirY = 0;
 		data->planeX = 0;
 		data->planeY = 0.66;
+		return (true);
 	}
 	else if (c == 'S')
 	{
@@ -17,20 +16,20 @@ static bool		is_north_or_south_pos(t_data *data, char c)
 		data->dirY = 0;
 		data->planeX = 0;
 		data->planeY = -0.66;
+		return (true);
 	}
-	return (true);
+	return (false);
 }
 
 static bool		is_west_or_esth_pos(t_data *data, char c)
 {
-	if (c != 'W' || c != 'E')
-		return (false);
-	else if (c == 'W')
+	if (c == 'W')
 	{
 		data->dirX = 0;
 		data->dirY = -1;
 		data->planeX = -0.66;
 		data->planeY = 0;
+		return (true);
 	}
 	else if (c == 'E')
 	{
@@ -38,8 +37,9 @@ static bool		is_west_or_esth_pos(t_data *data, char c)
 		data->dirY = 1;
 		data->planeX = 0.66;
 		data->planeY = 0;
+		return (true);
 	}
-	return (true);
+	return (false);
 }
 
 static void	player_pos_init(t_data *data)
@@ -56,8 +56,8 @@ static void	player_pos_init(t_data *data)
 			if (is_north_or_south_pos(data, data->map[x][y])
 			|| is_west_or_esth_pos(data, data->map[x][y]))
 			{
-				data->posX = x;
-				data->posY = y;
+				data->posX = x + 0.5;
+				data->posY = y + 0.5;
 				data->map[x][y] = '0';
 				return ;
 			}
@@ -155,7 +155,7 @@ void	game_init(t_data *data)
 	// ft_memset(rayC) 0;
 	player_pos_init(data);
 	// fill_textures(data);
-
+	
 	draw_on_screen(data);
 
 

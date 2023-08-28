@@ -23,7 +23,6 @@ int     keys_handler(int keycode, t_data *data)
 		|| move_left(data, keycode) || move_right(data, keycode)
 		|| rotate_left(data, keycode) || rotate_right(data, keycode))
 	{
-		write(1, "\nDIR\n", 5);
 		draw_on_screen(data);
 		return (1);
 	}

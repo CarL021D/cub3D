@@ -3,8 +3,8 @@
 void	member_init(t_data *data, t_rayC *rayC, int x)
 {
 	rayC->cameraX = 2 * x / (double)(SCREEN_WIDTH) - 1;
-	data->dirX = data->dirX + data->planeX * rayC->cameraX;
-	data->dirY = data->dirY + data->planeY * rayC->cameraX;
+	rayC->rayDirX = data->dirX + data->planeX * rayC->cameraX;
+	rayC->rayDirY = data->dirY + data->planeY * rayC->cameraX;
 	rayC->mapX = (int)(data->posX);
 	rayC->mapY = (int)(data->posY);
 	if (rayC->rayDirX == 0)
@@ -17,7 +17,6 @@ void	member_init(t_data *data, t_rayC *rayC, int x)
 		rayC->deltaDistY = fabs(1 / rayC->rayDirY);
 }
 
-// rayCulate step
 void	init_step_and_side_dist(t_data *data, t_rayC *rayC)
 {
 	if (rayC->rayDirX < 0)
@@ -69,11 +68,9 @@ void	ray_dist_init(t_rayC *rayC)
 		rayC->perpWallDist = (rayC->sideDistX - rayC->deltaDistX);
 	else
 		rayC->perpWallDist = (rayC->sideDistY - rayC->deltaDistY);
-	//Calculate height of line to draw on screen
 	rayC->lineHeight = (int)(SCREEN_HEIGHT / rayC->perpWallDist);
-	//calculate lowest and highest pixel to fill in current stripe
 	rayC->drawStart = -rayC->lineHeight / 2 + SCREEN_HEIGHT / 2;
-	if (rayC->drawStart < 0)
+	if (rayC->drawStart > SCREEN_HEIGHT)
 		rayC->drawStart = 0;
 	rayC->drawEnd = rayC->lineHeight / 2 + SCREEN_HEIGHT / 2;
 	if (rayC->drawEnd >= SCREEN_HEIGHT)

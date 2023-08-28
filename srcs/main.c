@@ -1,7 +1,5 @@
 #include "../inc/cub3d.h"
 
-#include <stdio.h>
-
 int	main(int ac, char **av)
 {
 	(void)ac;
@@ -29,7 +27,7 @@ int	main(int ac, char **av)
             data.map[i][j] = '0';
         }
     }
-	data.map[3][4] = 'N';
+	data.map[1][1] = 'N';
     // Print the data.map
     for (int i = 0; data.map[i]; i++) {
         for (int j = 0; data.map[i][j]; j++) {
@@ -39,15 +37,18 @@ int	main(int ac, char **av)
     }
     printf("\n");
 
-	data.ceiling_color = 0xF0F8FF;
-	data.floor_color = 0x808080;
+	data.ceilingColor = 0xF0F8FF;
+	data.floorColor = 0x808080;
+	data.wallColor = 0xFF0FF;
+    data.fov = 3.14159263 / 9;
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 	// Parsing;
 	game_init(&data);
 	mlx_hook(data.mlx_win, KeyPress, KeyPressMask, keys_handler, &data);
 	mlx_hook(data.mlx_win, KeyRelease, KeyReleaseMask, keys_handler, &data);
-	// mlx_loop_hook(data.mlx, draw_on_screen, &data);
+	mlx_loop_hook(data.mlx, draw_on_screen, &data);
 	mlx_loop(data.mlx);
 
 

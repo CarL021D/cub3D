@@ -9,14 +9,19 @@
 #include <math.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <stdio.h>
+#include <string.h>
+
+
+
 
 #define SCREEN_HEIGHT 480
 #define SCREEN_WIDTH 640
 
-#define KEY_UP 126
-#define KEY_DOWN 125
-#define KEY_LEFT 123
-#define KEY_RIGHT 124
+#define KEY_UP 119
+#define KEY_DOWN 115
+#define KEY_LEFT 113
+#define KEY_RIGHT 101
 #define ROTATE_LEFT_KEY 97
 #define ROTATE_RIGHT_KEY 100
 #define ROT_SPEED 0.1
@@ -51,14 +56,19 @@ typedef struct s_data
 	char	*path_so;
 	char	*path_we;
 	char	*path_ea;
-	int		ceiling_color;
-	int		floor_color;
+	int		ceilingColor;
+	int		floorColor;
+	int		wallColor;
 	int		nb_data;
 	char	*map_simple;
 
 	int		*texture[4];
 
+
+
+	double fov;
 	int current_buffer;
+	// double playerDir;
 
 }	t_data;
 
@@ -71,7 +81,7 @@ typedef struct s_rayC
 	double		perpWallDist;
 	double		wallX;
 	int			texX;
-	int			color;
+	// int			color;+
 	int			mapX;
 	int			mapY;
 	double		sideDistX;
