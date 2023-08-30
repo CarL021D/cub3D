@@ -81,6 +81,7 @@ typedef struct s_rayC
 	double		perpWallDist;
 	double		wallX;
 	int			texX;
+	int			texNum;
 	// int			color;+
 	int			mapX;
 	int			mapY;

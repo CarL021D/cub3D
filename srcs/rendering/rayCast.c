@@ -11,9 +11,9 @@ void rayC_init(t_rayC *rayC)
 
 int	draw_on_screen(t_data *data)
 {
-	t_rayC			rayC;
-	int				x;
-
+	t_rayC	rayC;
+	int		x;
+	int		texNum;
 // - - - - - - - 
 	data->current_buffer = 0;
 // - - - - - - - 
@@ -26,6 +26,7 @@ int	draw_on_screen(t_data *data)
 		init_step_and_side_dist(data, &rayC);
 		dda(data, &rayC);
 		ray_dist_init(&rayC);
+		data.texNum = data->map[data->posX][data->posY] - 1 - '0';
 		// get_wallX(data, &rayC);
 		// get_textX(data, &rayC);
 		draw_rays(data, &rayC, x);
