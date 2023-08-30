@@ -17,6 +17,7 @@
 
 #define SCREEN_HEIGHT 480
 #define SCREEN_WIDTH 640
+#define TEXT_WIDTH 64
 
 #define KEY_UP 119
 #define KEY_DOWN 115
@@ -81,6 +82,7 @@ typedef struct s_rayC
 	double		perpWallDist;
 	double		wallX;
 	int			texX;
+	int			texY;
 	int			texNum;
 	// int			color;+
 	int			mapX;
