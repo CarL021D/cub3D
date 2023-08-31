@@ -31,7 +31,7 @@ all:	${NAME}
 		@$(CC) ${CFLAGS} -I$(INCS) -c $< -o $@
 
 ${NAME}:	${OBJS} ${MLX}
-		@${CC} ${CFLAGS} ${OBJS} ${MLX}  -lX11 -lXext -o cub3d
+		@${CC} ${CFLAGS} ${OBJS} ${MLX}  -lX11 -lXext -lm -o cub3d
 		@printf "%s\e[0;32m cub3d : Compiling object file into executable\n\e[0m" "-"
 
 ${MLX}:

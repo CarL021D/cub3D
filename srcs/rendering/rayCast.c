@@ -9,11 +9,30 @@ void rayC_init(t_rayC *rayC)
 	rayC->rayDirY = 0;
 }
 
+void	drawPixOnWall(t_data *data)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < SCREEN_HEIGHT)
+	{
+		x = 0;
+		while (x < SCREEN_WIDTH)
+		{
+			data->addr[SCREEN_WIDTH * y + x] = data->pixBuffer[y][x];
+			x++;
+		}
+		y++;
+	}
+	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
+}
+
 int	draw_on_screen(t_data *data)
 {
 	t_rayC	rayC;
 	int		x;
-	int		texNum;
+
 // - - - - - - - 
 	data->current_buffer = 0;
 // - - - - - - - 
@@ -26,15 +45,13 @@ int	draw_on_screen(t_data *data)
 		init_step_and_side_dist(data, &rayC);
 		dda(data, &rayC);
 		ray_dist_init(&rayC);
-		data.texNum = data->map[data->posX][data->posY] - 1 - '0';
-		// get_wallX(data, &rayC);
-		// get_textX(data, &rayC);
+		rayC.texNum = data->map[rayC.mapX][rayC.mapY] - 1 - '0';
+		get_wallX(data, &rayC);
+		get_textX(&rayC);
 		draw_rays(data, &rayC, x);
 		x++;
 	}
 	
-	mlx_put_image_to_window(data->mlx, data->mlx_win, data->buffer[0]->img, 0, 0);
-	// data->current_buffer = (data->current_buffer + 1) % 2;
 	return (1);
 }
 

@@ -2,8 +2,8 @@
 # define CUB3D_H
 
 #include "../mlx/mlx.h"
-# include <X11/X.h>
-# include <X11/keysym.h>
+#include <X11/X.h>
+#include <X11/keysym.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <math.h>
@@ -30,11 +30,12 @@
 typedef struct s_tex
 {
 	void	*img;       // Pointer to the loaded image
-	char	*addr;          // Pointer to the pixel data
+	int		*addr;
+	char	*path;	     // Pointer to the pixel data
 	int		width;           // Width of the texture
-	int		height;          // Height of the texture
-	int		bpp;			 // Bits per pixel for the texture
-	int		size_line;       // Bytes per line in the texture
+	int		height;      // Height of the texture
+	int		bpp;			// Bits per pixel for the texture
+	int		size_line;      // Bytes per line in the texture
 	int		endian;          // Endianness information
 }	t_tex;
 
@@ -42,7 +43,7 @@ typedef struct s_data
 {
 	void		*mlx;
 	void		*mlx_win;
-	t_tex		*tex[4];
+	t_tex		tex[4];
 	char		**map;
 	double		posX;
 	double		posY;
@@ -51,7 +52,7 @@ typedef struct s_data
 	double		planeX;
 	double		planeY;
 
-	t_tex		*buffer[2];
+	int			pixBuffer[SCREEN_HEIGHT][SCREEN_WIDTH];
 
 	char	*path_no;
 	char	*path_so;
@@ -59,16 +60,19 @@ typedef struct s_data
 	char	*path_ea;
 	int		ceilingColor;
 	int		floorColor;
-	int		wallColor;
+	// int		wallColor;
 	int		nb_data;
 	char	*map_simple;
 
 	int		*texture[4];
 
+	void	*img;
+	int		*addr;
+	int		bpp;
+	int		line_length;
+	int		endian;
 
-
-	// double fov;
-	int current_buffer;
+	int 	current_buffer;
 	// double playerDir;
 
 }	t_data;
@@ -102,8 +106,8 @@ typedef struct s_rayC
 	void	game_init(t_data *data);
 	int		draw_on_screen(t_data * data);
 	void	draw_rays(t_data *data, t_rayC *rayC, int x);
-	// void	get_wallX(t_data *data, t_rayC *rayC);
-	// void	get_textX(t_data *data,t_rayC *rayC);
+	void	get_wallX(t_data *data, t_rayC *rayC);
+	void	get_textX(t_rayC *rayC);
 	void	ray_dist_init(t_rayC *rayC);
 	void	dda(t_data *data, t_rayC *rayC);
 	void	init_step_and_side_dist(t_data *data, t_rayC *rayC);
