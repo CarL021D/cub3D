@@ -17,7 +17,7 @@
 
 #define SCREEN_HEIGHT 480
 #define SCREEN_WIDTH 640
-#define TEXT_WIDTH 64
+#define TEXT_HEIGHT 64
 
 #define KEY_UP 119
 #define KEY_DOWN 115
@@ -67,7 +67,7 @@ typedef struct s_data
 
 
 
-	double fov;
+	// double fov;
 	int current_buffer;
 	// double playerDir;
 
@@ -84,7 +84,6 @@ typedef struct s_rayC
 	int			texX;
 	int			texY;
 	int			texNum;
-	// int			color;+
 	int			mapX;
 	int			mapY;
 	double		sideDistX;
