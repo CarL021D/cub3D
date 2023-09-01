@@ -25,10 +25,10 @@ static int	getPixWallColor(t_data *data, t_rayC *rayC)
 	if (rayC->side == 1 && rayC->rayDirY > 0)
 		currentColor = data->texture[0][TEXT_HEIGHT * rayC->texY + rayC->texX];
 	else if (rayC->side == 1 && rayC->rayDirY < 0)
-			currentColor = data->texture[1][TEXT_HEIGHT * rayC->texY + rayC->texY];
+			currentColor = data->texture[1][TEXT_HEIGHT * rayC->texY + rayC->texX];
 	else if (rayC->side == 0 && rayC->rayDirX > 0)
 		currentColor = data->texture[3][TEXT_HEIGHT * rayC->texY + rayC->texX];
-	else
+	else if (rayC->side == 0 && rayC->rayDirX < 0)
 		currentColor = data->texture[2][TEXT_HEIGHT * rayC->texY + rayC->texX];
 	return (currentColor);
 }

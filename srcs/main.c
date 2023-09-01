@@ -46,8 +46,8 @@ int	main(int ac, char **av)
 		}
 		printf("\n");
 	}
-	data.path_so = sethPathStr("./assets/south_wall.xpm");
 	data.path_no = sethPathStr("./assets/north_wall.xpm");
+	data.path_so = sethPathStr("./assets/south_wall.xpm");
 	data.path_we = sethPathStr("./assets/west_wall.xpm");
 	data.path_ea = sethPathStr("./assets/east_wall.xpm");
 	data.ceilingColor = 0x44CEEB;

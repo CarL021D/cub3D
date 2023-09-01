@@ -32,10 +32,6 @@ int	draw_on_screen(t_data *data)
 	t_rayC	rayC;
 	int		x;
 
-// - - - - - - - 
-	data->current_buffer = 0;
-// - - - - - - - 
-
 	x = 0;
 	rayC_init(&rayC);
 	while (x < SCREEN_WIDTH)
