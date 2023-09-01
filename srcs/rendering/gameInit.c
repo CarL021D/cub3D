@@ -126,9 +126,6 @@ void	game_init(t_data *data)
 	data->img = mlx_new_image(data->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	data->addr = (int *)mlx_get_data_addr(data->img,
 			&data->bpp, &data->line_length, &data->endian);
-
 	fill_textures(data);
-	printf("TEXT -> INIT\n");
 	player_pos_init(data);
-	printf("PLAYER POS -> INIT\n\n");
 }
