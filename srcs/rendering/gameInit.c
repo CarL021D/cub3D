@@ -70,16 +70,11 @@ static void	player_pos_init(t_data *data)
 static void	textures_init(t_data *data, int i)
 {
 	data->tex[i].img = NULL;
-	if (i == 0)
-		data->tex[i].img = mlx_xpm_file_to_image(data->mlx,
-			data->tex[i].path, &data->tex[i].width, &data->tex[i].height);
-
-	// if (data->tex[i]->img == NULL)
-			// Free and exit
-
+	
+	data->tex[i].img = mlx_xpm_file_to_image(data->mlx,
+		data->tex[i].path, &data->tex[i].width, &data->tex[i].height);
 	data->tex[i].addr = (int *)mlx_get_data_addr(data->tex[i].img,
 		&data->tex[i].bpp, &data->tex[i].size_line, &data->tex[i].endian);
-
 
 	// to remove ??
 	data->texture[i] = malloc(sizeof(int) * 4096);
@@ -97,9 +92,13 @@ void	fill_textures(t_data *data)
 
 
 	tmp[0].path = data->path_no;
+	printf("%s\n\n", tmp[0].path);
 	tmp[1].path = data->path_so;
+	printf("%s\n\n", tmp[1].path);
 	tmp[2].path = data->path_we;
+	printf("%s\n\n", tmp[2].path);
 	tmp[3].path = data->path_ea;
+	printf("%s\n\n", tmp[3].path);
 	
 	while (i < 4)
 	{		
@@ -143,8 +142,13 @@ void	game_init(t_data *data)
 			&data->bpp, &data->line_length, &data->endian);
 
 	fill_textures(data);
+	printf("TEXT -> INIT\n\n");
+
 	player_pos_init(data);
+	printf("PLAYER POS -> INIT\n\n");
 	
+
+
 	// draw_on_screen(data);
 
 

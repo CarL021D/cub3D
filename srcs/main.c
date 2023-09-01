@@ -1,5 +1,21 @@
 #include "../inc/cub3d.h"
 
+static char *sethPathStr(char *str)
+{
+	char *ret;
+	int	 i = 0;
+	int len = 0;
+
+	while (str[len])
+		len++;
+	ret = malloc(sizeof(char) * len + 1);
+	i = -1;
+	while (str[++i])
+		ret[i] = str[i];
+	ret[i] = '\0';
+	return (ret);
+}
+
 int	main(int ac, char **av)
 {
 	(void)ac;
@@ -38,11 +54,10 @@ int	main(int ac, char **av)
 	printf("\n");
 
 
-	data.path_no = "./assets/north_wall.xpm";
-	printf("%s\n", data.path_no);
-	data.path_so = "./assets/south_wall.xpm";
-	data.path_we = "./assets/west_wall.xpm";
-	data.path_ea = "./assets/east_wall.xpm";
+	data.path_no = sethPathStr("./assets/north_wall.xpm");
+	data.path_so = sethPathStr("./assets/south_wall.xpm");
+	data.path_we = sethPathStr("./assets/west_wall.xpm");
+	data.path_ea = sethPathStr("./assets/east_wall.xpm");
 
 	data.ceilingColor = 0xF0F8FF;
 	data.floorColor = 0x808080;

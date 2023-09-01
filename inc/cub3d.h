@@ -64,8 +64,8 @@ typedef struct s_data
 	int		nb_data;
 	char	*map_simple;
 
-	int		*texture[4];
 
+	int		*texture[4];
 	void	*img;
 	int		*addr;
 	int		bpp;
