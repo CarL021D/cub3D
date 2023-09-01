@@ -51,7 +51,7 @@ int	draw_on_screen(t_data *data)
 		draw_rays(data, &rayC, x);
 		x++;
 	}
-	
+	drawPixOnWall(data);
 	return (1);
 }
 
