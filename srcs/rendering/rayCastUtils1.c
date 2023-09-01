@@ -7,6 +7,7 @@ void	member_init(t_data *data, t_rayC *rayC, int x)
 	rayC->rayDirY = data->dirY + data->planeY * rayC->cameraX;
 	rayC->mapX = (int)(data->posX);
 	rayC->mapY = (int)(data->posY);
+	rayC->hit = 0;
 	if (rayC->rayDirX == 0)
 		rayC->deltaDistX = 1e30;
 	else
@@ -62,21 +63,18 @@ void	dda(t_data *data, t_rayC *rayC)
 	}
 }
 
-void	ray_dist_init(t_rayC *rayC)
+void	ray_dist_init(t_data *data, t_rayC *rayC)
 {
+	(void)data;
 	if (rayC->side == 0)
 		rayC->perpWallDist = (rayC->sideDistX - rayC->deltaDistX);
 	else
 		rayC->perpWallDist = (rayC->sideDistY - rayC->deltaDistY);
 	rayC->lineHeight = (int)(SCREEN_HEIGHT / rayC->perpWallDist);
-
-
-	
 	rayC->drawStart = -rayC->lineHeight / 2 + SCREEN_HEIGHT / 2;
-	if (rayC->drawStart > SCREEN_HEIGHT)
+	if (rayC->drawStart < 0)
 		rayC->drawStart = 0;
 	rayC->drawEnd = rayC->lineHeight / 2 + SCREEN_HEIGHT / 2;
-	// if (rayC->drawEnd >= SCREEN_HEIGHT)
-	if (rayC->drawEnd < 0)
+	if (rayC->drawEnd >= SCREEN_HEIGHT)
 		rayC->drawEnd = SCREEN_HEIGHT - 1;
 }

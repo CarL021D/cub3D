@@ -75,8 +75,6 @@ static void	textures_init(t_data *data, int i)
 		data->tex[i].path, &data->tex[i].width, &data->tex[i].height);
 	data->tex[i].addr = (int *)mlx_get_data_addr(data->tex[i].img,
 		&data->tex[i].bpp, &data->tex[i].size_line, &data->tex[i].endian);
-
-	// to remove ??
 	data->texture[i] = malloc(sizeof(int) * 4096);
 }
 

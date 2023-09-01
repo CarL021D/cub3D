@@ -2,7 +2,6 @@
 
 void rayC_init(t_rayC *rayC)
 {
-	rayC->hit = 0;
 	rayC->mapX = 0;
 	rayC->mapY = 0;
 	rayC->rayDirX = 0;
@@ -20,7 +19,7 @@ void	drawPixOnWall(t_data *data)
 		x = 0;
 		while (x < SCREEN_WIDTH)
 		{
-			data->addr[SCREEN_WIDTH * y + x] = data->pixBuffer[y][x];
+			data->addr[SCREEN_WIDTH * y + x] = data->pixColor[y][x];
 			x++;
 		}
 		y++;
@@ -44,7 +43,7 @@ int	draw_on_screen(t_data *data)
 		member_init(data, &rayC, x);
 		init_step_and_side_dist(data, &rayC);
 		dda(data, &rayC);
-		ray_dist_init(&rayC);
+		ray_dist_init(data, &rayC);
 		rayC.texNum = data->map[rayC.mapX][rayC.mapY] - 1 - '0';
 		get_wallX(data, &rayC);
 		get_textX(&rayC);

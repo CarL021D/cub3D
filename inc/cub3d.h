@@ -52,7 +52,7 @@ typedef struct s_data
 	double		planeX;
 	double		planeY;
 
-	int			pixBuffer[SCREEN_HEIGHT][SCREEN_WIDTH];
+	int			pixColor[SCREEN_HEIGHT][SCREEN_WIDTH];
 
 	char	*path_no;
 	char	*path_so;
@@ -106,9 +106,12 @@ typedef struct s_rayC
 	void	game_init(t_data *data);
 	int		draw_on_screen(t_data * data);
 	void	draw_rays(t_data *data, t_rayC *rayC, int x);
-	void	get_wallX(t_data *data, t_rayC *rayC);
+	void	get_wallX(t_data *data, t_rayC *rayC);	
 	void	get_textX(t_rayC *rayC);
-	void	ray_dist_init(t_rayC *rayC);
+
+	// void	ray_dist_init(t_rayC *rayC);
+	void	ray_dist_init(t_data *data, t_rayC *rayC);
+	
 	void	dda(t_data *data, t_rayC *rayC);
 	void	init_step_and_side_dist(t_data *data, t_rayC *rayC);
 	void	member_init(t_data *data, t_rayC *rayC, int x);
