@@ -46,13 +46,12 @@ int	main(int ac, char **av)
 		}
 		printf("\n");
 	}
-	data.path_no = sethPathStr("./assets/north_wall.xpm");
 	data.path_so = sethPathStr("./assets/south_wall.xpm");
+	data.path_no = sethPathStr("./assets/north_wall.xpm");
 	data.path_we = sethPathStr("./assets/west_wall.xpm");
 	data.path_ea = sethPathStr("./assets/east_wall.xpm");
 	data.ceilingColor = 0x44CEEB;
 	data.floorColor =  0x8B4513;
-	// data.wallColor = 0xFF0FF;
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -62,11 +61,4 @@ int	main(int ac, char **av)
 	mlx_hook(data.mlx_win, KeyRelease, KeyReleaseMask, keys_handler, &data);
 	mlx_loop_hook(data.mlx, draw_on_screen, &data);
 	mlx_loop(data.mlx);
-
-
-	write(1, "\nEXIT\n", 6);
-// 0 < drawstart 		ceilling
-// drawStart < drawEnd	wall
-// drawEnd < lowScreen	 define WINHEIGHT
-
 }

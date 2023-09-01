@@ -69,8 +69,15 @@ static void	player_pos_init(t_data *data)
 
 static void	textures_init(t_data *data, int i)
 {
+	if (i == 0)
+		data->tex[0].path = data->path_no;
+	if (i == 1)
+		data->tex[1].path = data->path_so;
+	if (i == 2)
+		data->tex[2].path = data->path_we;
+	if (i == 3)
+		data->tex[3].path = data->path_ea;	
 	data->tex[i].img = NULL;
-	
 	data->tex[i].img = mlx_xpm_file_to_image(data->mlx,
 		data->tex[i].path, &data->tex[i].width, &data->tex[i].height);
 	data->tex[i].addr = (int *)mlx_get_data_addr(data->tex[i].img,
@@ -80,24 +87,11 @@ static void	textures_init(t_data *data, int i)
 
 void	fill_textures(t_data *data)
 {
-	t_tex	*tmp;
 	int		x;
 	int		y;
 	int		i;
 
 	i = 0;
-	tmp = data->tex;
-
-
-	tmp[0].path = data->path_no;
-	printf("%s\n\n", tmp[0].path);
-	tmp[1].path = data->path_so;
-	printf("%s\n\n", tmp[1].path);
-	tmp[2].path = data->path_we;
-	printf("%s\n\n", tmp[2].path);
-	tmp[3].path = data->path_ea;
-	printf("%s\n\n", tmp[3].path);
-	
 	while (i < 4)
 	{		
 		textures_init(data, i);
