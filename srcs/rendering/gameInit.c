@@ -120,11 +120,6 @@ void	fill_textures(t_data *data)
 
 void	game_init(t_data *data)
 {
-	// t_tex	*tmp;
-	// int		i;
-	// int		y;
-	// int		x;
-
 	data->mlx = mlx_init();
 	if (!data->mlx)
 		exit(EXIT_FAILURE);
@@ -134,26 +129,12 @@ void	game_init(t_data *data)
 		write(2, "Mlx initialisation failed\n", 26);
 		exit(1);
 	}
-
 	data->img = mlx_new_image(data->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	data->addr = (int *)mlx_get_data_addr(data->img,
 			&data->bpp, &data->line_length, &data->endian);
 
 	fill_textures(data);
-	printf("TEXT -> INIT\n\n");
-
+	printf("TEXT -> INIT\n");
 	player_pos_init(data);
 	printf("PLAYER POS -> INIT\n\n");
-	
-
-
-	// draw_on_screen(data);
-
-
-	// data_init();
-	// mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-
-
-
-	// player_pos_init(data);
 }

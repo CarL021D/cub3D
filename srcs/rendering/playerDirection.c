@@ -39,12 +39,12 @@ bool	move_left(t_data *data, int keycode)
 
 	printf("left\n");
 
-	if (data->map[(int)(data->posX + data->planeX * ROT_SPEED)]
+	if(data->map[(int)(data->posX - data->planeX * ROT_SPEED)]
 		[(int)(data->posY)] == '0')
-			data->posX += data->planeX * ROT_SPEED;
+			data->posX -= data->planeX * ROT_SPEED;
 	if(data->map[(int)(data->posX)]
-		[(int)(data->posY + data->planeY * ROT_SPEED)] == '0')	
-			data->posY += data->planeY * ROT_SPEED;
+		[(int)(data->posY - data->planeY * ROT_SPEED)] == '0')
+  			data->posY -= data->planeY * ROT_SPEED;
     return (true);
 }
 
@@ -55,11 +55,11 @@ bool	move_right(t_data *data, int keycode)
 
 	printf("right\n");
 
-	if(data->map[(int)(data->posX - data->planeX * ROT_SPEED)]
+	if (data->map[(int)(data->posX + data->planeX * ROT_SPEED)]
 		[(int)(data->posY)] == '0')
-			data->posX -= data->planeX * ROT_SPEED;
+			data->posX += data->planeX * ROT_SPEED;
 	if(data->map[(int)(data->posX)]
-		[(int)(data->posY - data->planeY * ROT_SPEED)] == '0')
-  			data->posY -= data->planeY * ROT_SPEED;
+		[(int)(data->posY + data->planeY * ROT_SPEED)] == '0')	
+			data->posY += data->planeY * ROT_SPEED;
     return (true);
 }

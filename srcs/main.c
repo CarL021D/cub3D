@@ -50,8 +50,8 @@ int	main(int ac, char **av)
 	data.path_so = sethPathStr("./assets/south_wall.xpm");
 	data.path_we = sethPathStr("./assets/west_wall.xpm");
 	data.path_ea = sethPathStr("./assets/east_wall.xpm");
-	data.ceilingColor = 0xF0F8FF;
-	data.floorColor = 0x808080;
+	data.ceilingColor = 0x44CEEB;
+	data.floorColor =  0x8B4513;
 	// data.wallColor = 0xFF0FF;
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

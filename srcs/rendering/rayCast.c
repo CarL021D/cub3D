@@ -43,7 +43,7 @@ int	draw_on_screen(t_data *data)
 		member_init(data, &rayC, x);
 		init_step_and_side_dist(data, &rayC);
 		dda(data, &rayC);
-		ray_dist_init(data, &rayC);
+		ray_dist_init(&rayC);
 		rayC.texNum = data->map[rayC.mapX][rayC.mapY] - 1 - '0';
 		get_wallX(data, &rayC);
 		get_textX(&rayC);

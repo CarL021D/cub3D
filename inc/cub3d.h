@@ -108,10 +108,7 @@ typedef struct s_rayC
 	void	draw_rays(t_data *data, t_rayC *rayC, int x);
 	void	get_wallX(t_data *data, t_rayC *rayC);	
 	void	get_textX(t_rayC *rayC);
-
-	// void	ray_dist_init(t_rayC *rayC);
-	void	ray_dist_init(t_data *data, t_rayC *rayC);
-	
+	void	ray_dist_init(t_rayC *rayC);	
 	void	dda(t_data *data, t_rayC *rayC);
 	void	init_step_and_side_dist(t_data *data, t_rayC *rayC);
 	void	member_init(t_data *data, t_rayC *rayC, int x);
