@@ -8,18 +8,14 @@ void	member_init(t_data *data, t_rayC *rayC, int x)
 	rayC->mapX = (int)(data->posX);
 	rayC->mapY = (int)(data->posY);
 	rayC->hit = 0;
-
-	rayC->deltaDistX = fabs(1 / rayC->rayDirX);
-	rayC->deltaDistY = fabs(1 / rayC->rayDirY);
-
-	// if (rayC->rayDirX == 0)
-	// 	rayC->deltaDistX = 1e30;
-	// else
-	// 	rayC->deltaDistX = fabs(1 / rayC->rayDirX);
-	// if (rayC->rayDirY == 0)
-	// 	rayC->deltaDistY = 1e30;
-	// else
-	// 	rayC->deltaDistY = fabs(1 / rayC->rayDirY);
+	if (rayC->rayDirX == 0)
+		rayC->deltaDistX = 1e30;
+	else
+		rayC->deltaDistX = fabs(1 / rayC->rayDirX);
+	if (rayC->rayDirY == 0)
+		rayC->deltaDistY = 1e30;
+	else
+		rayC->deltaDistY = fabs(1 / rayC->rayDirY);
 }
 
 void	init_step_and_side_dist(t_data *data, t_rayC *rayC)
@@ -69,7 +65,6 @@ void	dda(t_data *data, t_rayC *rayC)
 
 void	ray_dist_init(t_rayC *rayC)
 {
-	// (void)data;
 	if (rayC->side == 0)
 		rayC->perpWallDist = (rayC->sideDistX - rayC->deltaDistX);
 	else
