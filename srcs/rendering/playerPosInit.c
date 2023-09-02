@@ -6,7 +6,7 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 12:43:02 by caboudar          #+#    #+#             */
-/*   Updated: 2023/09/02 15:24:01 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/09/02 16:19:12 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,18 @@ static bool	is_north_or_south_pos(t_data *data, char c)
 {
 	if (c == 'N')
 	{
-		data->dirX = 1;
-		data->dirY = 0;
-		data->planeX = 0;
-		data->planeY = 0.66;
+		data->dirX = 0;
+		data->dirY = -1;
+		data->planeX = 0.66;
+		data->planeY = 0;
 		return (true);
 	}
 	else if (c == 'S')
 	{
-		data->dirX = -1;
-		data->dirY = 0;
-		data->planeX = 0;
-		data->planeY = -0.66;
+		data->dirX = 0;
+		data->dirY = 1;
+		data->planeX = -0.66;
+		data->planeY = 0;
 		return (true);
 	}
 	return (false);
@@ -37,18 +37,18 @@ static bool	is_west_or_esth_pos(t_data *data, char c)
 {
 	if (c == 'W')
 	{
-		data->dirX = 0;
-		data->dirY = -1;
-		data->planeX = -0.66;
-		data->planeY = 0;
+		data->dirX = -1;
+		data->dirY = 0;
+		data->planeX = 0;
+		data->planeY = -0.66;
 		return (true);
 	}
 	else if (c == 'E')
 	{
-		data->dirX = 0;
-		data->dirY = 1;
-		data->planeX = 0.66;
-		data->planeY = 0;
+		data->dirX = 1;
+		data->dirY = 0;
+		data->planeX = 0;
+		data->planeY = 0.66;
 		return (true);
 	}
 	return (false);
