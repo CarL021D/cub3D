@@ -59,6 +59,7 @@ int	main(int ac, char **av)
 	game_init(&data);
 	mlx_hook(data.mlx_win, KeyPress, KeyPressMask, keys_handler, &data);
 	mlx_hook(data.mlx_win, KeyRelease, KeyReleaseMask, keys_handler, &data);
+	mlx_hook(data.mlx_win, DestroyNotify, StructureNotifyMask, free_and_exit, &data);
 	mlx_loop_hook(data.mlx, draw_on_screen, &data);
 	mlx_loop(data.mlx);
 }

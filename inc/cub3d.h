@@ -18,7 +18,8 @@
 #define SCREEN_HEIGHT 480
 #define SCREEN_WIDTH 640
 #define TEXT_HEIGHT 64
-
+#define SUCCESS 0
+#define FAILURE 0
 #define KEY_UP 119
 #define KEY_DOWN 115
 #define KEY_LEFT 113
@@ -119,5 +120,7 @@ typedef struct s_rayC
 	bool	rotate_left(t_data *data, int keycode);
 	bool	rotate_right(t_data *data, int keycode);
 	int     keys_handler(int key, t_data *data);
+	int	free_and_exit(t_data *data);
+
 
 #endif

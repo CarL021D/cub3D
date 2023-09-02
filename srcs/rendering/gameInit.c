@@ -112,16 +112,31 @@ void	fill_textures(t_data *data)
 	}
 }
 
+void	mlx_data_init(t_data *data)
+{
+	data->texture[0] = NULL;
+	data->texture[1] = NULL;
+	data->texture[2] = NULL;
+	data->texture[3] = NULL;
+	data->img = NULL;
+	data->mlx_win = NULL;
+	data->mlx = NULL;
+}
+
 void	game_init(t_data *data)
 {
+	mlx_data_init(data);
 	data->mlx = mlx_init();
 	if (!data->mlx)
-		exit(EXIT_FAILURE);
+	{
+		write(2, "Mlx initialisation failed\n", 26);
+		free_and_exit(data);
+	}
 	data->mlx_win = mlx_new_window(data->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "Cub");
 	if (!data->mlx_win)
 	{
-		write(2, "Mlx initialisation failed\n", 26);
-		exit(1);
+		write(2, "Mlx window initialisation failed\n", 33);
+		free_and_exit(data);
 	}
 	data->img = mlx_new_image(data->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	data->addr = (int *)mlx_get_data_addr(data->img,
