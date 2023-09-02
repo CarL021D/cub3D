@@ -6,7 +6,7 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 12:53:34 by caboudar          #+#    #+#             */
-/*   Updated: 2023/09/02 12:55:09 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/09/02 17:17:16 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static void	textures_init(t_data *data, int i)
 	data->tex[i].img = NULL;
 	data->tex[i].img = mlx_xpm_file_to_image(data->mlx,
 			data->tex[i].path, &data->tex[i].width, &data->tex[i].height);
+	if (!data->tex[i].img)
+		free_and_exit(data);			
 	data->tex[i].addr = (int *)mlx_get_data_addr(data->tex[i].img,
 			&data->tex[i].bpp, &data->tex[i].size_line, &data->tex[i].endian);
 	data->texture[i] = malloc(sizeof(int) * 4096);
