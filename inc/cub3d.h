@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/02 12:56:19 by caboudar          #+#    #+#             */
+/*   Updated: 2023/09/02 12:56:20 by caboudar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -69,7 +81,7 @@ typedef struct s_data
 	void	*img;
 	int		*addr;
 	int		bpp;
-	int		line_length;
+	int		lineLength;
 	int		endian;
 
 	int 	current_buffer;
@@ -77,7 +89,7 @@ typedef struct s_data
 
 }	t_data;
 
-typedef struct s_rayC
+typedef struct s_rayc
 {
 	double		cameraX;
 	int			hit;
@@ -101,18 +113,18 @@ typedef struct s_rayC
 	int			drawStart;
 	int			drawEnd;
 
-}	t_rayC;
+}	t_rayc;
 
 	void	game_init(t_data *data);
 	void	player_pos_init(t_data *data);
 	int		draw_on_screen(t_data * data);
-	void	draw_rays(t_data *data, t_rayC *rayC, int x);
-	void	get_wallX(t_data *data, t_rayC *rayC);	
-	void	get_textX(t_rayC *rayC);
-	void	ray_dist_init(t_rayC *rayC);	
-	void	dda(t_data *data, t_rayC *rayC);
-	void	init_step_and_side_dist(t_data *data, t_rayC *rayC);
-	void	member_init(t_data *data, t_rayC *rayC, int x);
+	void	draw_rays(t_data *data, t_rayc *rayc, int x);
+	void	get_wall_x(t_data *data, t_rayc *rayc);	
+	void	get_text_x(t_rayc *rayc);
+	void	ray_dist_init(t_rayc *rayc);	
+	void	dda(t_data *data, t_rayc *rayc);
+	void	init_step_and_side_dist(t_data *data, t_rayc *rayc);
+	void	member_init(t_data *data, t_rayc *rayc, int x);
 	bool	move_forward(t_data *data, int keycode);
 	bool	move_backward(t_data *data, int keycode);
 	bool	move_left(t_data *data, int keycode);

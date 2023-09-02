@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   playerPosInit.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/02 12:43:02 by caboudar          #+#    #+#             */
+/*   Updated: 2023/09/02 12:43:30 by caboudar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/cub3d.h"
 
-static bool		is_north_or_south_pos(t_data *data, char c)
+static bool	is_north_or_south_pos(t_data *data, char c)
 {
 	if (c == 'N')
 	{
@@ -21,7 +33,7 @@ static bool		is_north_or_south_pos(t_data *data, char c)
 	return (false);
 }
 
-static bool		is_west_or_esth_pos(t_data *data, char c)
+static bool	is_west_or_esth_pos(t_data *data, char c)
 {
 	if (c == 'W')
 	{

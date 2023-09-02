@@ -1,61 +1,75 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rayCastUtils2.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/02 12:43:44 by caboudar          #+#    #+#             */
+/*   Updated: 2023/09/02 12:53:01 by caboudar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/cub3d.h"
 
-void	get_wallX(t_data *data, t_rayC *rayC)
+void	get_wall_x(t_data *data, t_rayc *rayc)
 {
-	if (rayC->side == 0)
-		rayC->wallX = data->posY + rayC->perpWallDist * rayC->rayDirY;
+	if (rayc->side == 0)
+		rayc->wallX = data->posY + rayc->perpWallDist * rayc->rayDirY;
 	else
-		rayC->wallX = data->posX + rayC->perpWallDist * rayC->rayDirX;
-	rayC->wallX -= floor(rayC->wallX); 
+		rayc->wallX = data->posX + rayc->perpWallDist * rayc->rayDirX;
+	rayc->wallX -= floor(rayc->wallX);
 }
 
-void	get_textX(t_rayC *rayC)
+void	get_text_x(t_rayc *rayc)
 {
-	rayC->texX = (int)(rayC->wallX * (double)(TEXT_HEIGHT));
-	if (rayC->side == 0 && rayC->rayDirX > 0)
-		rayC->texX = TEXT_HEIGHT - rayC->texX - 1;
-	if (rayC->side == 1 && rayC->rayDirY < 0)
-		rayC->texX = TEXT_HEIGHT - rayC->texX - 1;
+	rayc->texX = (int)(rayc->wallX * (double)(TEXT_HEIGHT));
+	if (rayc->side == 0 && rayc->rayDirX > 0)
+		rayc->texX = TEXT_HEIGHT - rayc->texX - 1;
+	if (rayc->side == 1 && rayc->rayDirY < 0)
+		rayc->texX = TEXT_HEIGHT - rayc->texX - 1;
 }
 
-static int	getPixWallColor(t_data *data, t_rayC *rayC)
+static int	get_pix_wall_color(t_data *data, t_rayc *rayc)
 {
-	int		currentColor;
+	int		current_color;
 
-	if (rayC->side == 1 && rayC->rayDirY > 0)
-		currentColor = data->texture[0][TEXT_HEIGHT * rayC->texY + rayC->texX];
-	else if (rayC->side == 1 && rayC->rayDirY < 0)
-			currentColor = data->texture[1][TEXT_HEIGHT * rayC->texY + rayC->texX];
-	else if (rayC->side == 0 && rayC->rayDirX > 0)
-		currentColor = data->texture[3][TEXT_HEIGHT * rayC->texY + rayC->texX];
-	else if (rayC->side == 0 && rayC->rayDirX < 0)
-		currentColor = data->texture[2][TEXT_HEIGHT * rayC->texY + rayC->texX];
-	return (currentColor);
+	if (rayc->side == 1 && rayc->rayDirY > 0)
+		current_color = data->texture[0][TEXT_HEIGHT * rayc->texY + rayc->texX];
+	else if (rayc->side == 1 && rayc->rayDirY < 0)
+			current_color = data->texture[1][TEXT_HEIGHT
+			* rayc->texY + rayc->texX];
+	else if (rayc->side == 0 && rayc->rayDirX > 0)
+		current_color = data->texture[3][TEXT_HEIGHT * rayc->texY + rayc->texX];
+	else if (rayc->side == 0 && rayc->rayDirX < 0)
+		current_color = data->texture[2][TEXT_HEIGHT * rayc->texY + rayc->texX];
+	return (current_color);
 }
 
-void	draw_rays(t_data *data, t_rayC *rayC, int x)
+void	draw_rays(t_data *data, t_rayc *rayc, int x)
 {
-	int		currentColor;
+	int		current_color;
 	int		y;
 	double	step;
-	double	texPos;
+	double	tex_pos;
 
-	step = 1.0 * TEXT_HEIGHT / rayC->lineHeight;
-	texPos = (rayC->drawStart - SCREEN_HEIGHT / 2 + rayC->lineHeight / 2) * step;	
+	step = 1.0 * TEXT_HEIGHT / rayc->lineHeight;
+	tex_pos = (rayc->drawStart - SCREEN_HEIGHT / 2
+			+ rayc->lineHeight / 2) * step;
 	y = 0;
 	while (y < SCREEN_HEIGHT)
 	{
-		if (y < rayC->drawStart)
-			currentColor = data->ceilingColor;
-		else if (y > rayC->drawEnd)
-			currentColor = data->floorColor;
+		if (y < rayc->drawStart)
+			current_color = data->ceilingColor;
+		else if (y > rayc->drawEnd)
+			current_color = data->floorColor;
 		else
 		{
-			rayC->texY = (int)texPos & (TEXT_HEIGHT - 1);
-			texPos += step;
-			currentColor = getPixWallColor(data, rayC);
+			rayc->texY = (int)tex_pos & (TEXT_HEIGHT - 1);
+			tex_pos += step;
+			current_color = get_pix_wall_color(data, rayc);
 		}
-		data->pixColor[y][x] = currentColor;
+		data->pixColor[y][x] = current_color;
 		y++;
 	}
 }

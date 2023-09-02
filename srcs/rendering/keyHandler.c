@@ -1,9 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   keyHandler.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/02 12:41:39 by caboudar          #+#    #+#             */
+/*   Updated: 2023/09/02 12:41:46 by caboudar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/cub3d.h"
 
 int	free_and_exit(t_data *data)
 {
-
-
 	if (data->texture[0] != NULL)
 		free(data->texture[0]);
 	if (data->texture[1] != NULL)
@@ -38,9 +48,8 @@ int	free_and_exit(t_data *data)
 		mlx_destroy_window(data->mlx, data->mlx_win);
 	if (data->mlx != NULL)
 		mlx_destroy_display(data->mlx);
-	// if (id == FAILURE)
-		exit(EXIT_FAILURE);
-	// exit(EXIT_SUCCESS);
+	free(data->mlx);
+	exit(EXIT_FAILURE);
 	return (0);
 }
 
