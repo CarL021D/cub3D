@@ -6,6 +6,7 @@ SRCS	= 		srcs/main.c							\
 				srcs/rendering/keyHandler.c			\
 				srcs/rendering/playerDirection.c	\
 				srcs/rendering/playerRotation.c		\
+				srcs/rendering/playerPosInit.c		\
 				srcs/rendering/rayCast.c			\
 				srcs/rendering/rayCastUtils1.c		\
 				srcs/rendering/rayCastUtils2.c		\

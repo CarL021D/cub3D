@@ -52,7 +52,6 @@ typedef struct s_data
 	double		dirY;
 	double		planeX;
 	double		planeY;
-
 	int			pixColor[SCREEN_HEIGHT][SCREEN_WIDTH];
 
 	char	*path_no;
@@ -61,7 +60,7 @@ typedef struct s_data
 	char	*path_ea;
 	int		ceilingColor;
 	int		floorColor;
-	// int		wallColor;
+
 	int		nb_data;
 	char	*map_simple;
 
@@ -105,6 +104,7 @@ typedef struct s_rayC
 }	t_rayC;
 
 	void	game_init(t_data *data);
+	void	player_pos_init(t_data *data);
 	int		draw_on_screen(t_data * data);
 	void	draw_rays(t_data *data, t_rayC *rayC, int x);
 	void	get_wallX(t_data *data, t_rayC *rayC);	
@@ -120,7 +120,7 @@ typedef struct s_rayC
 	bool	rotate_left(t_data *data, int keycode);
 	bool	rotate_right(t_data *data, int keycode);
 	int     keys_handler(int key, t_data *data);
-	int	free_and_exit(t_data *data);
+	int		free_and_exit(t_data *data);
 
 
 #endif

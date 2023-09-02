@@ -1,6 +1,6 @@
 #include "../../inc/cub3d.h"
 
-void rayC_init(t_rayC *rayC)
+static void rayC_init(t_rayC *rayC)
 {
 	rayC->mapX = 0;
 	rayC->mapY = 0;
@@ -8,7 +8,7 @@ void rayC_init(t_rayC *rayC)
 	rayC->rayDirY = 0;
 }
 
-void	drawPixOnWall(t_data *data)
+static void	drawPixOnWall(t_data *data)
 {
 	int	y;
 	int	x;
