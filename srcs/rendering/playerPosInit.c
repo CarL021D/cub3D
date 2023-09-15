@@ -6,7 +6,7 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 12:43:02 by caboudar          #+#    #+#             */
-/*   Updated: 2023/09/02 16:19:12 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/09/02 21:21:29 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,18 @@ static bool	is_north_or_south_pos(t_data *data, char c)
 {
 	if (c == 'N')
 	{
-		data->dirX = 0;
-		data->dirY = -1;
-		data->planeX = 0.66;
-		data->planeY = 0;
+		data->dir_x = -1;
+		data->dir_y = 0;
+		data->plane_x = 0;
+		data->plane_y = 0.66;
 		return (true);
 	}
 	else if (c == 'S')
 	{
-		data->dirX = 0;
-		data->dirY = 1;
-		data->planeX = -0.66;
-		data->planeY = 0;
+		data->dir_x = 1;
+		data->dir_y = 0;
+		data->plane_x = 0;
+		data->plane_y = -0.66;
 		return (true);
 	}
 	return (false);
@@ -37,18 +37,18 @@ static bool	is_west_or_esth_pos(t_data *data, char c)
 {
 	if (c == 'W')
 	{
-		data->dirX = -1;
-		data->dirY = 0;
-		data->planeX = 0;
-		data->planeY = -0.66;
+		data->dir_x = 0;
+		data->dir_y = -1;
+		data->plane_x = -0.66;
+		data->plane_y = 0;
 		return (true);
 	}
 	else if (c == 'E')
 	{
-		data->dirX = 1;
-		data->dirY = 0;
-		data->planeX = 0;
-		data->planeY = 0.66;
+		data->dir_x = 0;
+		data->dir_y = 1;
+		data->plane_x = 0.66;
+		data->plane_y = 0;
 		return (true);
 	}
 	return (false);
@@ -68,8 +68,8 @@ void	player_pos_init(t_data *data)
 			if (is_north_or_south_pos(data, data->map[x][y])
 			|| is_west_or_esth_pos(data, data->map[x][y]))
 			{
-				data->posX = x + 0.5;
-				data->posY = y + 0.5;
+				data->pos_x = x + 0.5;
+				data->pos_y = y + 0.5;
 				data->map[x][y] = '0';
 				return ;
 			}

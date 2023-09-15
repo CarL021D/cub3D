@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyHandler.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: imessaad <imessaad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 12:41:39 by caboudar          #+#    #+#             */
-/*   Updated: 2023/09/02 12:41:46 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/09/02 20:35:37 by imessaad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,6 @@ int	free_and_exit(t_data *data)
 		free(data->texture[2]);
 	if (data->texture[3] != NULL)
 		free(data->texture[3]);
-// - - - - - - - - - - - - - - -
-
-	// free map
-	int i = 0;
-	while (data->map[i])
-		free(data->map[i++]);
-	free(data->map[i]);
-	free(data->map);
-
-	// free path
-	if (data->path_no != NULL)
-		free(data->path_no);
-	if (data->path_so != NULL)
-		free(data->path_so);
-	if (data->path_we != NULL)
-		free(data->path_we);
-	if (data->path_ea != NULL)
-		free(data->path_ea);
-// - - - - - - - - - - - - - - -
-
 	if (data->img != NULL)
 		mlx_destroy_image(data->mlx, data->img);
 	if (data->mlx_win != NULL)
@@ -49,6 +29,7 @@ int	free_and_exit(t_data *data)
 	if (data->mlx != NULL)
 		mlx_destroy_display(data->mlx);
 	free(data->mlx);
+	ft_free_(data);
 	exit(EXIT_FAILURE);
 	return (0);
 }

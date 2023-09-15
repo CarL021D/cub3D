@@ -1,5 +1,5 @@
 
-NAME = cub3d
+NAME = cub3D
 
 SRCS	= 		srcs/main.c							\
 				srcs/rendering/gameInit.c			\
@@ -10,7 +10,18 @@ SRCS	= 		srcs/main.c							\
 				srcs/rendering/rayCast.c			\
 				srcs/rendering/rayCastUtils1.c		\
 				srcs/rendering/rayCastUtils2.c		\
-				
+				srcs/parsing/parsing_utils_mod_map.c\
+				srcs/parsing/parsing_utils.c		\
+				srcs/parsing/parsing_utils2.c		\
+				srcs/parsing/parsing_utils3.c		\
+				srcs/parsing/parsing_utils4.c		\
+				srcs/parsing/parsing_utils5.c		\
+				srcs/parsing/parsing.c				\
+				srcs/parsing/libft_utils.c			\
+				srcs/parsing/ft_split.c				\
+				srcs/parsing/get_next_line/get_next_line.c \
+				srcs/parsing/libft_utils_2.c		\
+				srcs/parsing/libft_utils_3.c
 
 OBJS	= ${SRCS:.c=.o}
 
@@ -18,7 +29,7 @@ OBJS_B	= ${SRCS_B:.c=.o}
 
 CFLAGS	= -Wall -Werror -Wextra -g
 
-CC		= gcc
+CC		= cc
 
 RM		= rm -f
 

@@ -6,7 +6,7 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 12:55:35 by caboudar          #+#    #+#             */
-/*   Updated: 2023/09/02 12:55:36 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/09/02 21:31:56 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,45 @@
 
 void	member_init(t_data *data, t_rayc *rayc, int x)
 {
-	rayc->cameraX = 2 * x / (double)(SCREEN_WIDTH) - 1;
-	rayc->rayDirX = data->dirX + data->planeX * rayc->cameraX;
-	rayc->rayDirY = data->dirY + data->planeY * rayc->cameraX;
-	rayc->mapX = (int)(data->posX);
-	rayc->mapY = (int)(data->posY);
+	rayc->camera_x = 2 * x / (double)(SCREEN_WIDTH) - 1;
+	rayc->raydir_x = data->dir_x + data->plane_x * rayc->camera_x;
+	rayc->raydir_y = data->dir_y + data->plane_y * rayc->camera_x;
+	rayc->map_x = (int)(data->pos_x);
+	rayc->map_y = (int)(data->pos_y);
 	rayc->hit = 0;
-	if (rayc->rayDirX == 0)
-		rayc->deltaDistX = 1e30;
+	if (rayc->raydir_x == 0)
+		rayc->delta_dist_x = 1e30;
 	else
-		rayc->deltaDistX = fabs(1 / rayc->rayDirX);
-	if (rayc->rayDirY == 0)
-		rayc->deltaDistY = 1e30;
+		rayc->delta_dist_x = fabs(1 / rayc->raydir_x);
+	if (rayc->raydir_y == 0)
+		rayc->delta_dist_y = 1e30;
 	else
-		rayc->deltaDistY = fabs(1 / rayc->rayDirY);
+		rayc->delta_dist_y = fabs(1 / rayc->raydir_y);
 }
 
 void	init_step_and_side_dist(t_data *data, t_rayc *rayc)
 {
-	if (rayc->rayDirX < 0)
+	if (rayc->raydir_x < 0)
 	{
-		rayc->stepX = -1;
-		rayc->sideDistX = (data->posX - rayc->mapX) * rayc->deltaDistX;
+		rayc->step_x = -1;
+		rayc->side_dist_x = (data->pos_x - rayc->map_x) * rayc->delta_dist_x;
 	}
 	else
 	{
-		rayc->stepX = 1;
-		rayc->sideDistX = (rayc->mapX + 1.0 - data->posX) * rayc->deltaDistX;
+		rayc->step_x = 1;
+		rayc->side_dist_x = (rayc->map_x + 1.0 - data->pos_x)
+			* rayc->delta_dist_x;
 	}
-	if (rayc->rayDirY < 0)
+	if (rayc->raydir_y < 0)
 	{
-		rayc->stepY = -1;
-		rayc->sideDistY = (data->posY - rayc->mapY) * rayc->deltaDistY;
+		rayc->step_y = -1;
+		rayc->side_dist_y = (data->pos_y - rayc->map_y) * rayc->delta_dist_y;
 	}
 	else
 	{
-		rayc->stepY = 1;
-		rayc->sideDistY = (rayc->mapY + 1.0 - data->posY) * rayc->deltaDistY;
+		rayc->step_y = 1;
+		rayc->side_dist_y = (rayc->map_y + 1.0 - data->pos_y)
+			* rayc->delta_dist_y;
 	}
 }
 
@@ -58,19 +60,19 @@ void	dda(t_data *data, t_rayc *rayc)
 {
 	while (!rayc->hit)
 	{
-		if (rayc->sideDistX < rayc->sideDistY)
+		if (rayc->side_dist_x < rayc->side_dist_y)
 		{
-			rayc->sideDistX += rayc->deltaDistX;
-			rayc->mapX += rayc->stepX;
+			rayc->side_dist_x += rayc->delta_dist_x;
+			rayc->map_x += rayc->step_x;
 			rayc->side = 0;
 		}
 		else
 		{
-			rayc->sideDistY += rayc->deltaDistY;
-			rayc->mapY += rayc->stepY;
+			rayc->side_dist_y += rayc->delta_dist_y;
+			rayc->map_y += rayc->step_y;
 			rayc->side = 1;
 		}
-		if (data->map[rayc->mapX][rayc->mapY] != '0')
+		if (data->map[rayc->map_x][rayc->map_y] != '0')
 			rayc->hit = 1;
 	}
 }
@@ -78,14 +80,14 @@ void	dda(t_data *data, t_rayc *rayc)
 void	ray_dist_init(t_rayc *rayc)
 {
 	if (rayc->side == 0)
-		rayc->perpWallDist = (rayc->sideDistX - rayc->deltaDistX);
+		rayc->perp_wall_dist = (rayc->side_dist_x - rayc->delta_dist_x);
 	else
-		rayc->perpWallDist = (rayc->sideDistY - rayc->deltaDistY);
-	rayc->lineHeight = (int)(SCREEN_HEIGHT / rayc->perpWallDist);
-	rayc->drawStart = -rayc->lineHeight / 2 + SCREEN_HEIGHT / 2;
-	if (rayc->drawStart < 0)
-		rayc->drawStart = 0;
-	rayc->drawEnd = rayc->lineHeight / 2 + SCREEN_HEIGHT / 2;
-	if (rayc->drawEnd >= SCREEN_HEIGHT)
-		rayc->drawEnd = SCREEN_HEIGHT - 1;
+		rayc->perp_wall_dist = (rayc->side_dist_y - rayc->delta_dist_y);
+	rayc->line_height = (int)(SCREEN_HEIGHT / rayc->perp_wall_dist);
+	rayc->draw_start = -rayc->line_height / 2 + SCREEN_HEIGHT / 2;
+	if (rayc->draw_start < 0)
+		rayc->draw_start = 0;
+	rayc->draw_end = rayc->line_height / 2 + SCREEN_HEIGHT / 2;
+	if (rayc->draw_end >= SCREEN_HEIGHT)
+		rayc->draw_end = SCREEN_HEIGHT - 1;
 }

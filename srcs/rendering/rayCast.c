@@ -6,7 +6,7 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 12:36:26 by caboudar          #+#    #+#             */
-/*   Updated: 2023/09/02 12:45:46 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/09/02 21:25:48 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static void	rayc_init(t_rayc *rayc)
 {
-	rayc->mapX = 0;
-	rayc->mapY = 0;
-	rayc->rayDirX = 0;
-	rayc->rayDirY = 0;
+	rayc->map_x = 0;
+	rayc->map_y = 0;
+	rayc->raydir_x = 0;
+	rayc->raydir_y = 0;
 }
 
 static void	draw_pix_on_wall(t_data *data)
@@ -31,7 +31,7 @@ static void	draw_pix_on_wall(t_data *data)
 		x = 0;
 		while (x < SCREEN_WIDTH)
 		{
-			data->addr[SCREEN_WIDTH * y + x] = data->pixColor[y][x];
+			data->addr[SCREEN_WIDTH * y + x] = data->pix_color[y][x];
 			x++;
 		}
 		y++;
@@ -52,7 +52,7 @@ int	draw_on_screen(t_data *data)
 		init_step_and_side_dist(data, &rayc);
 		dda(data, &rayc);
 		ray_dist_init(&rayc);
-		rayc.texNum = data->map[rayc.mapX][rayc.mapY] - 1 - '0';
+		rayc.tex_num = data->map[rayc.map_x][rayc.map_y] - 1 - '0';
 		get_wall_x(data, &rayc);
 		get_text_x(&rayc);
 		draw_rays(data, &rayc, x);
