@@ -6,7 +6,7 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 12:43:44 by caboudar          #+#    #+#             */
-/*   Updated: 2023/09/10 17:03:29 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/09/21 19:52:19 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static int	create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-
 void	draw_rays(t_data *data, t_rayc *rayc, int x)
 {
 	int		current_color;
@@ -63,17 +62,18 @@ void	draw_rays(t_data *data, t_rayc *rayc, int x)
 	double	step;
 	double	tex_pos;
 
-	current_color = 0;
 	step = 1.0 * TEXT_HEIGHT / rayc->line_height;
 	tex_pos = (rayc->draw_start - SCREEN_HEIGHT / 2
 			+ rayc->line_height / 2) * step;
-	y = 0;
-	while (y < SCREEN_HEIGHT)
+	y = -1;
+	while (++y < SCREEN_HEIGHT)
 	{
 		if (y < rayc->draw_start)
-			current_color = create_trgb(255, data->ceiling_r, data->ceiling_g, data->ceiling_b);
+			current_color = create_trgb(255, data->ceiling_r,
+					data->ceiling_g, data->ceiling_b);
 		else if (y > rayc->draw_end)
-			current_color = create_trgb(255, data->floor_r, data->floor_g, data->floor_b);
+			current_color = create_trgb(255, data->floor_r,
+					data->floor_g, data->floor_b);
 		else
 		{
 			rayc->tex_y = (int)tex_pos & (TEXT_HEIGHT - 1);
@@ -81,6 +81,5 @@ void	draw_rays(t_data *data, t_rayc *rayc, int x)
 			current_color = get_pix_wall_color(data, rayc);
 		}
 		data->pix_color[y][x] = current_color;
-		y++;
 	}
 }
